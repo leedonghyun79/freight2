@@ -4,17 +4,18 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Shield, Truck, Thermometer, FileText } from "lucide-react";
+import { siteConfig } from "@/config/site.config";
+import { trackConversion } from "@/lib/track";
 
-const images = [
-  "/images/메인트럭사진.jpg",
-  "/images/메인대표사진1.jpg",
-];
-
-const stats = [
-  { icon: Shield, label: "적재물 보험", value: "10억+" },
-  { icon: Truck, label: "무진동 배차", value: "1분 내" },
-  { icon: Thermometer, label: "항온항습", value: "24/7" },
-];
+const { hero, contact } = siteConfig;
+const images = hero.images;
+const iconMap = {
+  shield: Shield,
+  truck: Truck,
+  thermometer: Thermometer,
+  file: FileText,
+} as const;
+const stats = hero.stats.map((s) => ({ ...s, icon: iconMap[s.icon] }));
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -69,54 +70,45 @@ export default function Hero() {
           className="flex flex-col items-center text-center md:items-start md:text-left max-w-4xl"
         >
           <span className="text-primary-orange text-xs md:text-sm font-black tracking-[0.4em] uppercase mb-4 md:mb-6 block drop-shadow-md">
-            SPECIAL CARGO TRANSPORT
+            {hero.eyebrow}
           </span>
 
           <h1 className="text-[28px] md:text-[64px] font-outfit font-black text-white leading-[1.2] md:leading-[1.1] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] break-keep">
-            프로텍스가 제안하는<br />
-            <span className="text-primary-orange text-[32px] md:text-[72px]">운송의 새로운 기준</span>
+            {hero.titleLines.map((line, i) => (
+              <span key={i}>
+                {line}
+                <br />
+              </span>
+            ))}
+            <span className="text-primary-orange text-[32px] md:text-[72px]">{hero.highlight}</span>
           </h1>
 
           <p className="text-[14px] md:text-[20px] text-gray-100 font-medium mb-10 md:mb-12 max-w-2xl leading-relaxed drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] opacity-90 break-keep">
-            고가의 반도체, 의료장비, 고부가가치 화물을<br className="md:hidden" /> 가치 그대로 안전하게 전합니다.<br />
-            프로텍스만의 전담팀과 정밀 관제 시스템으로<br className="md:hidden" /> 처음부터 끝까지 책임집니다.
+            {hero.description.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < hero.description.length - 1 && <br />}
+              </span>
+            ))}
           </p>
 
           <div className="flex flex-row justify-center md:justify-start items-center gap-3 md:gap-4 w-full">
             <a
-              href="https://pf.kakao.com/_qMeuX/chat"
+              href={contact.kakaoUrl}
               target="_blank"
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-                  if (typeof window !== 'undefined' && (window as any).wcs) {
-                    if (!(window as any)._nasa) (window as any)._nasa = {};
-                    (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-                    (window as any).wcs_do((window as any)._nasa);
-                  }
-                }
-              }}
-              className="flex-1 md:flex-none px-4 md:px-10 py-3.5 md:py-5 bg-primary-orange text-white font-bold rounded-full hover:bg-orange-600 transition-all duration-300 shadow-2xl shadow-primary-orange/40 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap"
+              onClick={() => trackConversion()}
+              className="flex-1 md:flex-none px-4 md:px-10 py-3.5 md:py-5 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/40 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap"
             >
               빠른 견적 문의
             </a>
             <a
-              href="tel:1833-6362"
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-                  if (typeof window !== 'undefined' && (window as any).wcs) {
-                    if (!(window as any)._nasa) (window as any)._nasa = {};
-                    (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-                    (window as any).wcs_do((window as any)._nasa);
-                  }
-                }
-              }}
-              className="flex-1 md:flex-none px-2 md:px-10 py-3.5 md:py-5 border border-white/50 bg-transparent text-white rounded-full hover:bg-white/10 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center"
+              href={`tel:${contact.phoneTel}`}
+              onClick={() => trackConversion()}
+              className="flex-1 md:flex-none px-2 md:px-10 py-3.5 md:py-5 border border-white/50 bg-transparent text-white rounded-lg hover:bg-white/10 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center"
             >
               <div className="flex flex-row items-center gap-1.5 md:gap-2 leading-none">
                 <span className="text-[11px] md:text-[15px] text-white/80 md:text-white font-medium">고객센터</span>
-                <span className="text-[13px] md:text-[15px] font-bold">1833-6362</span>
+                <span className="text-[13px] md:text-[15px] font-bold">{contact.phoneDisplay}</span>
               </div>
             </a>
           </div>

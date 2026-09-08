@@ -1,22 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { Menu, X, Phone } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { siteConfig } from "@/config/site.config";
+import BrandLogo from "@/components/BrandLogo";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const navLinks = [
-  { name: "회사 소개", href: "#about" },
-  { name: "비즈니스 영역", href: "#services" },
-  { name: "핵심 기술", href: "#technology" },
-  { name: "운송 사례", href: "#portfolio" },
-  { name: "견적 문의", href: "#contact" },
-];
+const navLinks = siteConfig.nav;
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -56,14 +51,7 @@ export default function Navbar() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center cursor-pointer"
         >
-          <div className="relative w-[160px] h-[50px]">
-            <Image
-              src={isScrolled ? "/images/로고_c.png" : "/images/로고_w.png"}
-              alt="PROTEX Logo"
-              fill
-              className="object-contain transition-all duration-300"
-            />
-          </div>
+          <BrandLogo variant={isScrolled ? "light" : "dark"} />
         </button>
 
         {/* Desktop Nav */}
@@ -141,7 +129,7 @@ export default function Navbar() {
 
         <div className="absolute bottom-10 flex items-center text-white/60 space-x-2">
           <Phone size={18} />
-          <span>1833-6362</span>
+          <span>{siteConfig.contact.phoneDisplay}</span>
         </div>
       </div>
     </nav>
