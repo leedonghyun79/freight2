@@ -98,7 +98,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#f8f9fa] scroll-mt-24">
+    <section id="contact" className="py-24 bg-[#f5f5f4] scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="bg-white rounded-none shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[750px] border border-gray-100">
           {/* Left Info Area */}

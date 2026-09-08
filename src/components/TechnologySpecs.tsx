@@ -35,7 +35,7 @@ const techFeatures = [
 
 export default function TechnologySpecs() {
   return (
-    <section id="technology" className="py-24 bg-[#f8f9fa] overflow-hidden relative scroll-mt-24">
+    <section id="technology" className="py-24 bg-[#f5f5f4] overflow-hidden relative scroll-mt-24">
       {/* Background Watermark Icon */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 opacity-[0.03] select-none pointer-events-none z-0">
         <Truck size={800} strokeWidth={1} className="text-primary-navy" />

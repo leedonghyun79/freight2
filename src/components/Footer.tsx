@@ -61,7 +61,7 @@ export default function Footer() {
   const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);
 
   return (
-    <footer className="bg-[#0f1115] text-white pt-20 pb-12 overflow-hidden relative">
+    <footer className="bg-[#111316] text-white pt-20 pb-12 overflow-hidden relative">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-orange/5 blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
