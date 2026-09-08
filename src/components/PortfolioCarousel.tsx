@@ -85,7 +85,7 @@ export default function PortfolioCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="portfolio" className="py-24 bg-white overflow-hidden scroll-mt-24">
+    <section id="portfolio" className="py-28 bg-white overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Standardized Section Header with Navigation */}
         <div className="flex flex-row justify-between items-end mb-10 md:mb-16">

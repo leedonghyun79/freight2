@@ -54,7 +54,7 @@ export default function ServiceSection() {
   const [activeIdx, setActiveIdx] = useState(0);
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-white overflow-hidden scroll-mt-24">
+    <section id="services" className="py-20 md:py-28 bg-white overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16 px-6">
@@ -97,7 +97,7 @@ export default function ServiceSection() {
         </div>
 
         {/* Desktop Main Content Card (Slide) */}
-        <div className="hidden md:block relative h-[600px] w-full bg-primary-navy rounded-[40px] overflow-hidden shadow-2xl">
+        <div className="hidden md:block relative h-[600px] w-full bg-primary-navy rounded-[40px] overflow-hidden shadow-xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIdx}

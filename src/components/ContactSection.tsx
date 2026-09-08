@@ -95,9 +95,9 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#f5f5f4] scroll-mt-24">
+    <section id="contact" className="py-28 bg-[#f5f5f4] scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="bg-white rounded-none shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[750px] border border-gray-100">
+        <div className="bg-white rounded-none shadow-xl overflow-hidden flex flex-col lg:flex-row min-h-[750px] border border-gray-100">
           {/* Left Info Area */}
           <div className="lg:w-5/12 bg-primary-navy p-[35px] relative overflow-hidden flex flex-col justify-between text-white">
             {/* Visual Background Accent */}
@@ -339,7 +339,7 @@ export default function ContactSection() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-2xl md:rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] md:max-h-[80vh] overflow-hidden relative z-10 flex flex-col mx-4"
+              className="bg-white rounded-2xl md:rounded-3xl shadow-xl w-full max-w-2xl max-h-[90vh] md:max-h-[80vh] overflow-hidden relative z-10 flex flex-col mx-4"
             >
               <div className="p-6 md:p-8 border-b border-gray-50 flex items-center justify-between">
                 <h3 className="text-lg md:text-xl font-black text-primary-navy">개인정보 처리방침</h3>

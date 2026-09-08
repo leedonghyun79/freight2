@@ -35,7 +35,7 @@ const techFeatures = [
 
 export default function TechnologySpecs() {
   return (
-    <section id="technology" className="py-24 bg-[#f5f5f4] overflow-hidden relative scroll-mt-24">
+    <section id="technology" className="py-28 bg-[#f5f5f4] overflow-hidden relative scroll-mt-24">
       {/* Background Watermark Icon */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 opacity-[0.03] select-none pointer-events-none z-0">
         <Truck size={800} strokeWidth={1} className="text-primary-navy" />
@@ -63,7 +63,7 @@ export default function TechnologySpecs() {
           className="flex flex-col lg:flex-row gap-6 items-stretch"
         >
           {/* Left: Featured Image Card (Integrated Text) */}
-          <div className="lg:w-[500px] flex-shrink-0 relative rounded-[40px] overflow-hidden shadow-2xl group bg-primary-navy">
+          <div className="lg:w-[500px] flex-shrink-0 relative rounded-[40px] overflow-hidden shadow-xl group bg-primary-navy">
             <Image
               src="/images/20260127_074853.jpg"
               alt="정밀 운송 전용 차량"

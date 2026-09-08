@@ -164,7 +164,7 @@ export default function Footer() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white rounded-2xl md:rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] overflow-hidden relative z-10 flex flex-col mx-4"
+              className="bg-white rounded-2xl md:rounded-3xl shadow-xl w-full max-w-3xl max-h-[90vh] md:max-h-[85vh] overflow-hidden relative z-10 flex flex-col mx-4"
             >
               <div className="p-6 md:p-8 border-b border-gray-100 flex items-center justify-between bg-white relative z-20">
                 <h3 className="text-lg md:text-xl font-black text-primary-navy">

@@ -13,7 +13,7 @@ const stats = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-24 bg-white relative overflow-hidden">
+    <section id="about" className="py-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-20 items-center">
           {/* Detailed Content */}
@@ -78,7 +78,7 @@ export default function AboutSection() {
           {/* Visual Element (Professional Shield Image) */}
           <div className="lg:w-1/2 relative group">
             <div className="absolute inset-0 bg-primary-navy/5 rounded-[60px] translate-x-10 translate-y-10 group-hover:translate-x-12 group-hover:translate-y-12 transition-transform duration-700"></div>
-            <div className="relative aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl border-8 border-white">
+            <div className="relative aspect-[4/5] rounded-[60px] overflow-hidden shadow-xl border-8 border-white">
                <Image
                   src="/images/case-1.png"
                   alt="Precision Transport Quality"
