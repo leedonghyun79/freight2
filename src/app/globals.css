@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --primary-navy: #001a40;  /* Protex Deep Blue Navy */
+  --primary-orange: #E87C00; /* Protex Orange */
+  --accent-orange: #C76A00;  /* Darker Orange for Hover */
+  --surface: #F8FAFC;
+  --glass: rgba(255, 255, 255, 0.7);
+  --dark-surface: #000c20;
+  
+  --background: #ffffff;
+  --foreground: #0F172A;
+  --bg-gray: #f8f9fa;
+}
+
+@theme {
+  --color-primary-navy: var(--primary-navy);
+  --color-primary-orange: var(--primary-orange);
+  --color-accent-orange: var(--accent-orange);
+  --color-surface: var(--surface);
+  --color-glass: var(--glass);
+  --color-dark-surface: var(--dark-surface);
+  
+  --font-outfit: var(--font-outfit);
+  --font-inter: var(--font-inter);
+
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.heading-gradient {
+  background: linear-gradient(135deg, #0A2342 0%, #1E40AF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Global cursor pointer for interactive elements */
+a, button, [role="button"], .swiper-button-prev, .swiper-button-next {
+  cursor: pointer !important;
+}
