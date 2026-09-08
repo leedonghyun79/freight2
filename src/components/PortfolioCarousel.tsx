@@ -25,15 +25,15 @@ const cases = [
   },
   {
     id: 2,
-    title: "대기업 반도체 라인 증설 운송",
-    description: "S사 평택 캠퍼스 신규 라인 도입을 위한 진동 흡수 시스템 가동. 수백억 원대 초정밀 장비를 완벽하게 안착.",
+    title: "반도체 생산라인 증설 운송",
+    description: "대규모 반도체 캠퍼스 신규 라인 도입을 위한 진동 흡수 시스템 가동. 수백억 원대 초정밀 장비를 완벽하게 안착.",
     category: "Semiconductor",
     image: "/images/20260311_102924.jpg",
     specs: ["Constant Temp", "Vibration Free", "Security"],
   },
   {
     id: 4,
-    title: "현대로템 정밀장비 운송",
+    title: "철도차량 정밀장비 운송",
     description: "전국 주요 공공기관의 노후 서버 및 신규 서버센터 통합 이전 프로젝트. 보안 1등급 기술 인력 및 특수 에어 서스펜션 차량 대거 투입.",
     category: "Data Center",
     image: "/images/20260316_095955.jpg",
@@ -41,7 +41,7 @@ const cases = [
   },
   {
     id: 5,
-    title: "한화우주센터 레이더 운송",
+    title: "항공우주 레이더 장비 운송",
     description: "항공우주 정밀 레이더 장비의 국가 전략 물자 특수 운송. 거대 중량물의 흔들림 없는 완벽 결박 및 실시간 보안 관제 시스템 가동.",
     category: "Aero & Defense",
     image: "/images/한화우주센터.jpg",
@@ -49,7 +49,7 @@ const cases = [
   },
   {
     id: 6,
-    title: "코엑스 기업전시물품 운송 및 철수",
+    title: "전시회 기업 전시물품 운송 및 철수",
     description: "연구 시설 내 다수의 분석 장비를 한 번에 안전하게 이동. 이중 밴드 결박 시스템과 전용 스펀지 완충제로 미세 흠집까지 방지.",
     category: "Bulk Transport",
     image: "/images/KakaoTalk_20241118_172833856_07.jpg",

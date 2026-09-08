@@ -46,7 +46,7 @@ export default function Hero() {
           >
             <Image
               src={images[currentImageIndex]}
-              alt="PROTEX Professional Special Cargo Transport"
+              alt={`${siteConfig.brand.nameEn} special cargo transport`}
               fill
               priority
               className={`object-cover object-center transition-all duration-700 ${currentImageIndex === 1 ? "md:object-left" : "md:object-right"

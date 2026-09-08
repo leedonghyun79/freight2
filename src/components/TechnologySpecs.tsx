@@ -66,7 +66,7 @@ export default function TechnologySpecs() {
           <div className="lg:w-[500px] flex-shrink-0 relative rounded-[40px] overflow-hidden shadow-2xl group bg-primary-navy">
             <Image
               src="/images/20260127_074853.jpg"
-              alt="PROTEX Professional Fleet"
+              alt="정밀 운송 전용 차량"
               fill
               className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-50 group-hover:opacity-60"
             />

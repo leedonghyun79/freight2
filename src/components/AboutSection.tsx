@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, TrendingUp, Users, ShieldCheck } from "lucide-react";
 import Image from "next/image";
+import { siteConfig } from "@/config/site.config";
 
 const stats = [
   { label: "누적 운송 거리", value: "1,200,000km+", icon: TrendingUp },
@@ -34,7 +35,7 @@ export default function AboutSection() {
             </div>
             
             <p className="text-gray-500 mb-10 leading-relaxed text-lg font-light">
-              프로펙스 특수운송은 외부 충격과 미세한 온습도 변화에도 민감한 <strong>반도체 설비, 의료 장비, 기술 자산</strong>을 가장 안전하고 전문적으로 운반하기 위해 탄생했습니다. 
+              {siteConfig.brand.nameKo}은 외부 충격과 미세한 온습도 변화에도 민감한 <strong>반도체 설비, 의료 장비, 기술 자산</strong>을 가장 안전하고 전문적으로 운반하기 위해 탄생했습니다.
               우리는 단순한 운송을 넘어, 고객사의 비즈니스 연속성을 보장하는 핵심 물류 파트너입니다.
             </p>
 
@@ -42,7 +43,7 @@ export default function AboutSection() {
               {[
                 "적재물 파손보상 보험 10억 의무가입 (전차량)",
                 "에어서스펜션 및 항온항습 무진동 특수 사양 차량 보유",
-                "삼성전자, SK하이닉스 등 국가핵심시설 보안 교육 이수",
+                "국가핵심시설 출입 보안 교육 이수 전담팀 운영",
                 "박물관 유물 및 미술품 전용 프리미엄 포장팀 운영"
               ].map((text, idx) => (
                 <motion.li 
@@ -87,7 +88,7 @@ export default function AboutSection() {
                {/* Floating Overlay Badge */}
                <div className="absolute top-10 right-10 p-6 glass rounded-3xl max-w-[200px]">
                   <div className="text-primary-orange text-xs font-bold mb-2">PARTNERSHIP</div>
-                  <div className="text-white text-base font-bold leading-snug">국내 대기업 및 국가연구 시설 전담 운송사</div>
+                  <div className="text-white text-base font-bold leading-snug">정밀장비·연구시설 전담 운송</div>
                </div>
             </div>
           </div>

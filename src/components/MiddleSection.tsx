@@ -39,7 +39,7 @@ export default function MiddleSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center mb-10 md:mb-16 max-w-4xl mx-auto">
           <span className="text-gray-300 font-bold text-sm tracking-widest uppercase mb-[5px] md:mb-4 block">
-            WHY PROTEX
+            WHY US
           </span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
