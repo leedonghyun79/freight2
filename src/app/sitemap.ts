@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
+import { siteConfig } from '@/config/site.config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://xn--2o2bo3ogka6rr6n9os3kcc0g.com' // Adjust as needed
-  
+  const baseUrl = siteConfig.site.url
+
   return [
     {
       url: baseUrl,

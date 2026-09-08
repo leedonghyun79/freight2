@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { SolapiMessageService } from 'solapi';
+import { siteConfig } from '@/config/site.config';
 
 /**
  * 솔라피 API를 사용하여 알림톡/SMS를 전송하는 경로입니다.
@@ -42,7 +43,7 @@ export async function POST(request: Request) {
 
     // 관리자 알림 메시지 포맷팅
     const textMessage = [
-      '[프로텍스] 새 견적 문의가 도착했습니다.',
+      `[${siteConfig.brand.nameKo}] 새 견적 문의가 도착했습니다.`,
       '',
       `👤 성함: ${name}`,
       `📞 연락처: ${phone}`,
@@ -65,11 +66,15 @@ export async function POST(request: Request) {
     console.log(`[Notification SUCCESS] To: ${ADMIN_RECEIVE_NUMBER}, Message ID: ${result.messageId}`);
 
     return NextResponse.json({ success: true, messageId: result.messageId });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[Solapi Error]:', error);
 
     // 솔라피 에러 객체에서 구체적인 메시지 추출 시도
-    const errorMessage = error?.response?.data?.errorMessage || error.message || 'SMS 발송 중 알 수 없는 오류가 발생했습니다.';
+    const err = error as { response?: { data?: { errorMessage?: string } }; message?: string };
+    const errorMessage =
+      err?.response?.data?.errorMessage ||
+      err?.message ||
+      'SMS 발송 중 알 수 없는 오류가 발생했습니다.';
 
     return NextResponse.json(
       { success: false, error: errorMessage },

@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import {
   Building2,
   MapPin,
@@ -13,9 +11,13 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/config/site.config";
+import BrandLogo from "@/components/BrandLogo";
+
+const { brand, contact, company } = siteConfig;
 
 const PRIVACY_POLICY_TEXT = `
-**프로펙스 (이하 ‘회사’라 한다)**는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다.
+**${brand.nameKo} (이하 ‘회사’라 한다)**는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다.
 
 **제1조 (개인정보의 처리목적)**
 회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
@@ -38,7 +40,7 @@ const PRIVACY_POLICY_TEXT = `
 
 const TERMS_OF_SERVICE_TEXT = `
 제1조 목적
-본 이용약관은 **프로펙스**(이하 "사이트")의 서비스의 이용조건과 운영에 관한 제반 사항 규정을 목적으로 합니다.
+본 이용약관은 **${brand.nameKo}**(이하 "사이트")의 서비스의 이용조건과 운영에 관한 제반 사항 규정을 목적으로 합니다.
 
 제2조 용어의 정의
 본 약관에서 사용되는 주요한 용어의 정의는 다음과 같습니다.
@@ -71,16 +73,10 @@ export default function Footer() {
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="mb-8 block"
             >
-              <Image
-                src="/images/로고_w.png"
-                alt="PROTEX Logo"
-                width={180}
-                height={50}
-                className="object-contain"
-              />
+              <BrandLogo variant="dark" />
             </button>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-8 break-keep">
-              프로텍스 특수운송은 반도체, 의료기기, 전산장비 등 고가의 정밀 자산을 현지 기술 인력과 실시간 관제 시스템을 통해 가장 안전하게 운송합니다.
+              {brand.nameKo}은 반도체·의료기기·정밀장비 등 고가의 정밀 자산을 전문 기술 인력과 실시간 관제 시스템을 통해 가장 안전하게 운송합니다.
             </p>
           </div>
 
@@ -95,14 +91,14 @@ export default function Footer() {
                   <div className="mt-1 text-primary-orange"><Phone size={18} /></div>
                   <div>
                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Representative Number</div>
-                    <div className="text-lg font-black text-white">1833-6362</div>
+                    <div className="text-lg font-black text-white">{contact.phoneDisplay}</div>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <div className="mt-1 text-primary-orange"><Mail size={18} /></div>
                   <div>
                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Email Support</div>
-                    <div className="text-sm font-bold text-gray-300">protexmove@gmail.com</div>
+                    <div className="text-sm font-bold text-gray-300">{contact.email}</div>
                   </div>
                 </div>
               </div>
@@ -119,8 +115,11 @@ export default function Footer() {
                   <div>
                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Office Location</div>
                     <div className="text-sm font-bold text-gray-300 leading-relaxed">
-                      본사: 경기도 안산시 단원구 시화호수로 835 <br />
-                      사업소(고덕): 경기도 평택시 고덕면 1234-5
+                      {company.addresses.map((a) => (
+                        <div key={a.label}>
+                          {a.label}: {a.value}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -129,7 +128,7 @@ export default function Footer() {
                   <div>
                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Registration Details</div>
                     <div className="text-sm font-bold text-gray-300">
-                      대표: 김태호
+                      대표: {company.ceo}
                     </div>
                   </div>
                 </div>
@@ -145,7 +144,7 @@ export default function Footer() {
             <button onClick={() => setModalType("terms")} className="hover:text-primary-orange transition-colors">이용약관</button>
           </div>
           <div className="flex items-center space-x-4">
-            <span>© 2026 PROTEX Special Cargo. <br className="md:hidden" /> ALL RIGHTS RESERVED.</span>
+            <span>© {new Date().getFullYear()} {brand.nameEn}. <br className="md:hidden" /> ALL RIGHTS RESERVED.</span>
           </div>
         </div>
       </div>

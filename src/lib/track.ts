@@ -7,7 +7,12 @@ import { siteConfig } from "@/config/site.config";
 export function trackConversion(): void {
   if (typeof window === "undefined") return;
 
-  const w = window as any;
+  const w = window as unknown as {
+    gtag?: (...args: unknown[]) => void;
+    wcs?: { cnv: (a: string, b: string) => string };
+    wcs_do?: (nasa: Record<string, string>) => void;
+    _nasa?: Record<string, string>;
+  };
   const { googleAdsId, googleAdsConversionLabel } = siteConfig.analytics;
 
   if (w.gtag && googleAdsId && googleAdsConversionLabel) {
@@ -19,8 +24,8 @@ export function trackConversion(): void {
   }
 
   if (w.wcs && siteConfig.analytics.naverWcsId) {
-    if (!w._nasa) w._nasa = {};
-    w._nasa["cnv"] = w.wcs.cnv("4", "1");
-    if (typeof w.wcs_do === "function") w.wcs_do(w._nasa);
+    const nasa = w._nasa ?? (w._nasa = {});
+    nasa["cnv"] = w.wcs.cnv("4", "1");
+    if (typeof w.wcs_do === "function") w.wcs_do(nasa);
   }
 }

@@ -3,6 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Phone, ArrowUp, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { siteConfig } from "@/config/site.config";
+import { trackConversion } from "@/lib/track";
+
+const { contact } = siteConfig;
 
 export default function FloatingAction() {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,18 +35,9 @@ export default function FloatingAction() {
             className="flex flex-col items-end space-y-4"
           >
             <motion.a
-              href="https://pf.kakao.com/_qMeuX/chat"
+              href={contact.kakaoUrl}
               target="_blank"
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-                  if (typeof window !== 'undefined' && (window as any).wcs) {
-                    if (!(window as any)._nasa) (window as any)._nasa = {};
-                    (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-                    (window as any).wcs_do((window as any)._nasa);
-                  }
-                }
-              }}
+              onClick={() => trackConversion()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="w-14 h-14 bg-[#FEE500] rounded-full shadow-2xl flex items-center justify-center text-[#3c1e1e] group relative"
@@ -55,17 +50,8 @@ export default function FloatingAction() {
 
             {/* Direct Call Button (Mobile Only) */}
             <motion.a
-              href="tel:1833-6362"
-              onClick={() => {
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                  (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-                  if (typeof window !== 'undefined' && (window as any).wcs) {
-                    if (!(window as any)._nasa) (window as any)._nasa = {};
-                    (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-                    (window as any).wcs_do((window as any)._nasa);
-                  }
-                }
-              }}
+              href={`tel:${contact.phoneTel}`}
+              onClick={() => trackConversion()}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="w-14 h-14 bg-primary-navy rounded-full shadow-2xl flex items-center justify-center text-white group relative border border-white/10 md:hidden"

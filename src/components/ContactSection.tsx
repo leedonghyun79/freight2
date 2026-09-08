@@ -10,6 +10,10 @@ import {
   X
 } from "lucide-react";
 import { useState } from "react";
+import { siteConfig } from "@/config/site.config";
+import { trackConversion } from "@/lib/track";
+
+const { contact, company } = siteConfig;
 
 const PRIVACY_TEXT = `
 [개인정보 수집 및 이용 동의 전문]
@@ -75,14 +79,7 @@ export default function ContactSection() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-          if (typeof window !== 'undefined' && (window as any).wcs) {
-            if (!(window as any)._nasa) (window as any)._nasa = {};
-            (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-            (window as any).wcs_do((window as any)._nasa);
-          }
-        }
+        trackConversion();
         setFormData({ name: '', phone: '', startLoc: '', endLoc: '', item: '', quantity: '', message: '' });
         setIsSubmitted(true);
 
@@ -115,7 +112,7 @@ export default function ContactSection() {
                 <span className="text-primary-orange">운송 솔루션</span>
               </h2>
               <p className="text-gray-400 text-[13px] leading-relaxed mb-12 max-w-xs font-medium">
-                365일 24시간 실시간 관제 시스템 가동. <br />
+                {company.supportNote} <br />
                 지금 바로 전문가와 상담하세요.
               </p>
 
@@ -123,22 +120,15 @@ export default function ContactSection() {
                 <div className="group">
                   <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold opacity-70">Company Representative</div>
                   <a
-                    href="tel:18336362"
-                    onClick={(e) => { 
-                      e.preventDefault(); 
-                      if (typeof window !== 'undefined' && (window as any).gtag) {
-                        (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-                        if (typeof window !== 'undefined' && (window as any).wcs) {
-                          if (!(window as any)._nasa) (window as any)._nasa = {};
-                          (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-                          (window as any).wcs_do((window as any)._nasa);
-                        }
-                      }
-                      window.location.href = 'tel:18336362'; 
+                    href={`tel:${contact.phoneTel}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      trackConversion();
+                      window.location.href = `tel:${contact.phoneTel}`;
                     }}
                     className="text-white text-4xl lg:text-5xl font-black tracking-tighter group-hover:text-primary-orange transition-colors flex items-center gap-3 cursor-pointer"
                   >
-                    1833-6362
+                    {contact.phoneDisplay}
                     <PhoneCall size={24} className="opacity-40 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </div>
@@ -146,20 +136,11 @@ export default function ContactSection() {
                 <div className="group">
                   <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold opacity-70">Email Inquiry</div>
                   <a
-                    href="mailto:protexmove@gmail.com"
-                    onClick={() => {
-                      if (typeof window !== 'undefined' && (window as any).gtag) {
-                        (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18131349273/cQG8COijsMIcEJne2cVD', 'value': 1.0, 'currency': 'KRW' });
-                        if (typeof window !== 'undefined' && (window as any).wcs) {
-                          if (!(window as any)._nasa) (window as any)._nasa = {};
-                          (window as any)._nasa["cnv"] = (window as any).wcs.cnv("4", "1");
-                          (window as any).wcs_do((window as any)._nasa);
-                        }
-                      }
-                    }}
+                    href={`mailto:${contact.email}`}
+                    onClick={() => trackConversion()}
                     className="text-white text-xl lg:text-2xl font-black group-hover:text-primary-orange transition-colors flex items-center gap-3 cursor-pointer break-all"
                   >
-                    protexmove@gmail.com
+                    {contact.email}
                     <Mail size={20} className="opacity-40 group-hover:opacity-100 transition-opacity shrink-0" />
                   </a>
                 </div>
@@ -172,12 +153,12 @@ export default function ContactSection() {
               <div className="space-y-6">
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Office Address</span>
-                  <span className="text-xs text-gray-300 leading-relaxed font-medium break-keep">경기도 평택시 고덕동 1234-5 프로젝트 타워 801호</span>
+                  <span className="text-xs text-gray-300 leading-relaxed font-medium break-keep">{company.addresses[0].value}</span>
                 </div>
                 <div className="flex items-start gap-12">
                   <div className="flex flex-col">
                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Representative</span>
-                    <span className="text-xs text-gray-300 font-medium whitespace-nowrap">김태호</span>
+                    <span className="text-xs text-gray-300 font-medium whitespace-nowrap">{company.ceo}</span>
                   </div>
                 </div>
               </div>
