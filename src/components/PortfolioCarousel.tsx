@@ -1,12 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, EffectFade, Controller } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { Navigation, Autoplay } from "swiper/modules";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -82,8 +79,6 @@ const cases = [
 ];
 
 export default function PortfolioCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
     <section id="portfolio" className="py-28 bg-white overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -122,7 +117,6 @@ export default function PortfolioCarousel() {
             spaceBetween={24}
             slidesPerView="auto" // Changed to auto to support fixed width slides
             loop={true}
-            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             navigation={{
               prevEl: "#work-prev",
               nextEl: "#work-next",

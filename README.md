@@ -1,37 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# freight2 — 특수운송 홈페이지 템플릿
 
-## Getting Started
+Next.js 원페이지 특수운송 사이트 템플릿. 새 업체용으로 재사용한다.
 
-First, run the development server:
+## 커스터마이징
+
+**`src/config/site.config.ts` 한 파일만 고치면 된다.**
+
+- `brand` — 상호(국/영), 로고 이미지 경로(비우면 텍스트 로고로 표시)
+- `contact` — 대표번호(표시용/tel용), 이메일, 카카오 상담 URL
+- `company` — 대표자, 주소 목록(첫 항목이 대표 주소), 안내 문구
+- `hero` — 메인 카피(eyebrow/타이틀/강조/설명), 통계, 배경 이미지
+- `nav` — 상단 메뉴
+- `analytics` — GA / 구글Ads / 네이버 추적 ID. **비우면 추적 코드가 삽입되지 않는다(안전 기본값).**
+- `site.url` — 도메인 (robots.txt / sitemap.xml / OG 태그에 사용)
+- `seo` — 메타 타이틀·설명·키워드·OG 이미지
+
+이미지는 `public/images/` 에 넣고 경로를 config에 지정.
+
+## 개발
 
 ```bash
+cp .env.example .env.local   # 견적폼 SMS 알림을 쓸 때만 값 채우기
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 견적폼 (솔라피 SMS)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`src/app/api/contact/route.ts` 가 솔라피로 관리자에게 문의 알림 SMS를 보낸다.
+쓰려면 아래 환경변수를 `.env.local`(로컬) 또는 배포 환경에 설정:
 
-## Learn More
+- `SOLAPI_API_KEY`, `SOLAPI_API_SECRET`
+- `SOLAPI_SENDER_NUMBER` (발신번호, 숫자만)
+- `ADMIN_RECEIVE_NUMBER` (수신번호, 숫자만)
 
-To learn more about Next.js, take a look at the following resources:
+키가 없으면 폼 제출 시 "서버 설정 오류입니다." 를 반환한다(사이트 자체는 정상 동작).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 배포
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+Netlify 설정(`netlify.toml`) 포함.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 스택
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# freight
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · Swiper

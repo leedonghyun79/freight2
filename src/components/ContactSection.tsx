@@ -1,14 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  PhoneCall,
-  Mail,
-  Smartphone,
-  ChevronRight,
-  CheckCheck,
-  X
-} from "lucide-react";
+import { PhoneCall, Mail, ChevronRight, CheckCheck, X } from "lucide-react";
 import { useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import { trackConversion } from "@/lib/track";

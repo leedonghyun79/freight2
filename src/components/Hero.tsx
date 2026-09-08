@@ -3,19 +3,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Shield, Truck, Thermometer, FileText } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 import { trackConversion } from "@/lib/track";
 
 const { hero, contact } = siteConfig;
 const images = hero.images;
-const iconMap = {
-  shield: Shield,
-  truck: Truck,
-  thermometer: Thermometer,
-  file: FileText,
-} as const;
-const stats = hero.stats.map((s) => ({ ...s, icon: iconMap[s.icon] }));
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

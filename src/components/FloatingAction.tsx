@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Phone, ArrowUp, X } from "lucide-react";
+import { MessageCircle, Phone, ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site.config";
 import { trackConversion } from "@/lib/track";
@@ -10,7 +10,6 @@ const { contact } = siteConfig;
 
 export default function FloatingAction() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {

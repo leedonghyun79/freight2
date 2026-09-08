@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Building2,
-  MapPin,
-  Phone,
-  Mail,
-  Info,
-  ChevronUp,
-  X
-} from "lucide-react";
+import { Building2, MapPin, Phone, Mail, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
