@@ -49,3 +49,4 @@ Netlify 설정(`netlify.toml`) 포함.
 ## 스택
 
 Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · Swiper
+# freight2
