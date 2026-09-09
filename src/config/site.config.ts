@@ -14,6 +14,8 @@ export interface SiteConfig {
   };
   company: {
     ceo: string;
+    /** 사업자등록번호 */
+    bizNo: string;
     /** 첫 항목이 대표 주소로 쓰임 */
     addresses: { label: string; value: string }[];
     supportNote: string;
@@ -63,6 +65,7 @@ export const siteConfig: SiteConfig = {
   },
   company: {
     ceo: "홍길동",
+    bizNo: "000-00-00000",
     addresses: [
       { label: "본사", value: "서울특별시 ○○구 ○○로 000, 0층" },
       { label: "물류센터", value: "경기도 ○○시 ○○면 산업로 000" },
@@ -71,11 +74,11 @@ export const siteConfig: SiteConfig = {
   },
   hero: {
     eyebrow: "SPECIAL CARGO TRANSPORT",
-    titleLines: ["한국정밀운송이 제안하는"],
-    highlight: "운송의 새로운 기준",
+    titleLines: ["단 1mm의 흔들림 없이,"],
+    highlight: "가치를 그대로 옮깁니다",
     description: [
-      "반도체·의료기기·정밀장비 등 고부가가치 화물을 가치 그대로 안전하게 전합니다.",
-      "전담팀과 정밀 관제 시스템으로 처음부터 끝까지 책임집니다.",
+      "반도체·의료기기·항공우주 정밀장비를 무진동 항온항습 전용 차량으로 운송합니다.",
+      "전담 엔지니어와 실시간 관제로 상차부터 도착지 설치까지 책임집니다.",
     ],
     stats: [
       { icon: "shield", label: "적재물 보험", value: "10억+" },

@@ -2,13 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 import { Truck, Thermometer, Box, ShieldCheck } from "lucide-react";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
 
 const techFeatures = [
   {
@@ -35,111 +29,91 @@ const techFeatures = [
 
 export default function TechnologySpecs() {
   return (
-    <section id="technology" className="py-28 bg-[#f5f5f4] overflow-hidden relative scroll-mt-24">
-      {/* Background Watermark Icon */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 opacity-[0.03] select-none pointer-events-none z-0">
-        <Truck size={800} strokeWidth={1} className="text-primary-navy" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="text-center mb-10 md:mb-16 lg:mb-24">
-          <span className="text-gray-400 font-bold text-sm tracking-widest uppercase mb-[5px] md:mb-4 block">
-            TECHNOLOGY & SPEC
-          </span>
+    <section
+      id="technology"
+      className="py-20 md:py-28 bg-[#f5f5f4] overflow-hidden scroll-mt-24"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="mb-10 md:mb-14">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-gray-400 font-bold text-sm tracking-[0.2em] uppercase">
+              Technology &amp; Spec
+            </span>
+            <span className="h-px w-12 bg-gray-400" />
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-2xl md:text-[36px] font-outfit font-black text-primary-navy tracking-tight"
+            className="text-[26px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep"
           >
             보유차량 <span className="text-primary-orange">제원 및 핵심기술</span>
           </motion.h2>
         </div>
 
+        {/* Wide image band + frosted-glass spec block */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col lg:flex-row gap-6 items-stretch"
+          className="relative w-full h-[clamp(320px,52vh,560px)] rounded-2xl overflow-hidden ring-1 ring-black/5"
         >
-          {/* Left: Featured Image Card (Integrated Text) */}
-          <div className="lg:w-[500px] flex-shrink-0 relative rounded-[40px] overflow-hidden shadow-xl group bg-primary-navy">
-            <Image
-              src="/images/20260127_074853.jpg"
-              alt="정밀 운송 전용 차량"
-              fill
-              className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-50 group-hover:opacity-60"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-            
-            {/* Overlay Content */}
-            <div className="absolute inset-0 p-10 flex flex-col justify-end">
-              <div className="space-y-6">
-                <div className="bg-primary-orange text-white px-4 py-1.5 rounded-lg text-[11px] font-bold tracking-widest uppercase inline-block font-inter">
-                  주력 차량
+          <Image
+            src="/images/20260127_074853.jpg"
+            alt="정밀 운송 전용 차량"
+            fill
+            sizes="(max-width: 1280px) 100vw, 1216px"
+            className="object-cover object-[18%_28%]"
+          />
+
+          <div className="absolute inset-x-4 bottom-4 md:inset-auto md:left-8 md:bottom-8 md:max-w-md">
+            <div className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-xl p-6 md:p-8 text-white shadow-2xl shadow-black/30">
+              <span className="inline-block bg-primary-orange text-white px-3 py-1 rounded-md text-[11px] font-bold tracking-[0.15em] uppercase mb-4">
+                주력 차량
+              </span>
+              <h3 className="text-lg lg:text-xl font-black leading-snug tracking-tight mb-3 break-keep">
+                최신 독일제 MAN트럭 &amp; 1톤무진동 부터 25톤무진동 화물차
+              </h3>
+              <p className="text-white/70 text-[13px] lg:text-sm leading-relaxed mb-5">
+                4.2톤 대형 파워 리프트 장착
+                <br />
+                <span className="text-white/55">(폭 2,400 / 길이 6,200 / 높이 2,500 이상)</span>
+              </p>
+              <div className="pt-4 border-t border-white/15">
+                <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/45 mb-1">
+                  Standard Spec
                 </div>
-                <div>
-                  <h3 className="text-2xl lg:text-[28px] font-black text-white leading-[1.3] tracking-tighter mb-4">
-                    최신 독일제 MAN트럭 & <br />
-                    1톤무진동 부터 25톤무진동 화물차
-                  </h3>
-                  <p className="text-gray-300 text-sm lg:text-[15px] font-medium leading-relaxed font-inter opacity-90">
-                    4.2톤 대형 파워 리프트 장착 <br />
-                    <span className="text-[14px] font-normal">(폭 2,400 / 길이 6,200 / 높이 2,500 이상)</span>
-                  </p>
-                </div>
-              </div>
-              
-              {/* Bottom Status Info */}
-              <div className="mt-10 pt-6 border-t border-white/10">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">Standard Spec</div>
-                    <div className="text-white text-xs font-bold font-inter">MAN TGX Vibration Free</div>
-                  </div>
-                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white">
-                    <Truck size={20} />
-                  </div>
-                </div>
+                <div className="font-bold text-sm">MAN TGX Vibration Free</div>
               </div>
             </div>
           </div>
-
-          {/* Right: 2-Column Grid of Features (Maintained as cards) */}
-          <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {techFeatures.map((feature, idx) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={cn(
-                  "bg-white rounded-[40px] p-8 lg:p-10 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group/card flex flex-col justify-between"
-                )}
-              >
-                <div>
-                  <div className="w-16 h-16 mb-8 flex items-center justify-center transition-all duration-500 relative group/icon">
-                    <div className="absolute inset-0 bg-primary-orange/5 rounded-3xl blur-xl group-hover/card:bg-primary-orange/10 transition-all"></div>
-                    <div className="relative z-10 w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-primary-orange group-hover/card:bg-primary-orange group-hover/card:text-white transition-all">
-                      <feature.icon size={24} strokeWidth={2} />
-                    </div>
-                  </div>
-                  <h4 className="text-lg lg:text-xl font-black text-primary-navy mb-4 group-hover/card:text-primary-orange transition-colors tracking-tight">
-                    {feature.title}
-                  </h4>
-                  <p className="text-gray-500 text-sm lg:text-[15px] leading-relaxed font-inter opacity-80 group-hover/card:opacity-100 transition-opacity">
-                    {feature.description}
-                  </p>
-                </div>
-                
-                <div className="mt-6 flex items-center text-[10px] font-bold text-gray-300 tracking-widest uppercase group-hover/card:text-primary-orange transition-colors">
-                  Technical Feature <div className="ml-2 h-px flex-grow bg-gray-100 group-hover/card:bg-primary-orange/20" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
+
+        {/* Feature strip */}
+        <div className="mt-10 md:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {techFeatures.map((feature, idx) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08 }}
+              className="group py-6 lg:py-2 lg:px-8 border-t sm:border-t-0 border-black/10 lg:border-t-0 lg:border-l lg:first:border-l-0 lg:first:pl-0"
+            >
+              <feature.icon
+                size={22}
+                strokeWidth={2}
+                className="text-primary-orange mb-4"
+              />
+              <h4 className="text-base lg:text-lg font-black text-primary-navy mb-2 tracking-tight group-hover:text-primary-orange transition-colors break-keep">
+                {feature.title}
+              </h4>
+              <p className="text-gray-500 text-sm leading-relaxed break-keep">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

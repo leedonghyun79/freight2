@@ -6,6 +6,7 @@ import TechnologySpecs from "@/components/TechnologySpecs";
 import PortfolioCarousel from "@/components/PortfolioCarousel";
 import ContactSection from "@/components/ContactSection";
 import FloatingAction from "@/components/FloatingAction";
+import StickyCtaBar from "@/components/StickyCtaBar";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
       <Hero />
       
       {/* Scroll Overlay Container: Subsequent sections scroll OVER the Hero */}
-      <div className="relative z-10 bg-white">
+      <div className="relative z-10 bg-primary-navy">
         <MiddleSection />
         <ServiceSection />
         <TechnologySpecs />
@@ -24,6 +25,8 @@ export default function Home() {
         <FloatingAction />
         <Footer />
       </div>
+
+      <StickyCtaBar />
     </main>
   );
 }

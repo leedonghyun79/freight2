@@ -1,31 +1,13 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { PhoneCall, Mail, ChevronRight, CheckCheck, X } from "lucide-react";
+import { ChevronRight, CheckCheck, X } from "lucide-react";
 import { useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import { trackConversion } from "@/lib/track";
+import { PRIVACY_TEXT } from "@/lib/privacy";
 
-const { contact, company } = siteConfig;
-
-const PRIVACY_TEXT = `
-[개인정보 수집 및 이용 동의 전문]
-
-1. 수집하는 개인정보 항목
-- 필수항목: 성함/업체명, 연락처, 상차지(출발지), 하차지(도착지)
-- 선택항목: 운송 품목 및 수량, 상세 문의 내용
-
-2. 개인정보의 수집 및 이용 목적
-- 화물 운송 견적 상담 및 서비스 제공을 위한 본인 확인
-- 서비스 이용에 따른 민원 사항 처리 및 고지사항 전달
-
-3. 개인정보의 보유 및 이용기간
-- 원칙적으로 개인정보의 수집 및 이용 목적이 달성되면 지체 없이 파기합니다.
-- 단, 상담 이력 관리 및 관련 법령에 의하여 보존할 필요가 있는 경우 일정 기간 보관할 수 있습니다. (최대 1년)
-
-4. 동의 거부 권리 및 불이익
-- 귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 필수 항목 수집에 거부하실 경우 견적 상담 서비스 이용이 제한될 수 있습니다.
-`;
+const { company } = siteConfig;
 
 export default function ContactSection() {
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -87,83 +69,35 @@ export default function ContactSection() {
     }
   };
 
+  const inputClass =
+    "w-full bg-gray-50 border-b-2 border-gray-100 h-14 px-2 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-base";
+
   return (
-    <section id="contact" className="py-28 bg-[#f5f5f4] scroll-mt-24">
+    <section id="contact" className="bg-primary-navy py-20 md:py-32 scroll-mt-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="bg-white rounded-none shadow-xl overflow-hidden flex flex-col lg:flex-row min-h-[750px] border border-gray-100">
-          {/* Left Info Area */}
-          <div className="lg:w-5/12 bg-primary-navy p-[35px] relative overflow-hidden flex flex-col justify-between text-white">
-            {/* Visual Background Accent */}
-            <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary-orange/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div className="relative z-10">
-              <span className="text-primary-orange text-xs font-black tracking-widest uppercase mb-[5px] md:mb-4 block">
-                INQUIRY
-              </span>
-              <h2 className="text-2xl lg:text-5xl font-outfit font-black mb-8 leading-tight tracking-tight">
-                고객 맞춤 <br />
-                <span className="text-primary-orange">운송 솔루션</span>
-              </h2>
-              <p className="text-gray-400 text-[13px] leading-relaxed mb-12 max-w-xs font-medium">
-                {company.supportNote} <br />
-                지금 바로 전문가와 상담하세요.
-              </p>
-
-              <div className="space-y-12">
-                <div className="group">
-                  <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold opacity-70">Company Representative</div>
-                  <a
-                    href={`tel:${contact.phoneTel}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      trackConversion();
-                      window.location.href = `tel:${contact.phoneTel}`;
-                    }}
-                    className="text-white text-4xl lg:text-5xl font-black tracking-tighter group-hover:text-primary-orange transition-colors flex items-center gap-3 cursor-pointer"
-                  >
-                    {contact.phoneDisplay}
-                    <PhoneCall size={24} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                </div>
-
-                <div className="group">
-                  <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold opacity-70">Email Inquiry</div>
-                  <a
-                    href={`mailto:${contact.email}`}
-                    onClick={() => trackConversion()}
-                    className="text-white text-xl lg:text-2xl font-black group-hover:text-primary-orange transition-colors flex items-center gap-3 cursor-pointer break-all"
-                  >
-                    {contact.email}
-                    <Mail size={20} className="opacity-40 group-hover:opacity-100 transition-opacity shrink-0" />
-                  </a>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Business Details (Enhanced Density) */}
-            <div className="relative z-10 pt-8 border-t border-white/10 mt-12 grid grid-cols-1 gap-6">
-              <div className="space-y-6">
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Office Address</span>
-                  <span className="text-xs text-gray-300 leading-relaxed font-medium break-keep">{company.addresses[0].value}</span>
-                </div>
-                <div className="flex items-start gap-12">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Representative</span>
-                    <span className="text-xs text-gray-300 font-medium whitespace-nowrap">{company.ceo}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-2 rounded-full bg-primary-orange animate-pulse"></div>
-                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-none">Available 24/7 National Wide Support</span>
-              </div>
-            </div>
+        {/* Statement */}
+        <div className="text-white text-left mb-10 md:mb-12 max-w-2xl">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="text-primary-orange text-xs font-black tracking-[0.2em] uppercase">
+              Inquiry
+            </span>
+            <span className="h-px w-12 bg-primary-orange" />
           </div>
+          <h2 className="text-3xl lg:text-[52px] font-outfit font-black leading-[1.15] tracking-tight mb-6 break-keep">
+            고객 맞춤 <br />
+            <span className="text-primary-orange">운송 솔루션</span>
+          </h2>
+          <p className="text-gray-400 text-sm leading-relaxed font-medium break-keep">
+            {company.supportNote} <br />
+            지금 바로 전문가와 상담하세요.
+          </p>
+        </div>
 
-          {/* Right Form Area */}
-          <div id="contact-form" className="lg:w-7/12 p-[35px] relative bg-white">
+        {/* Form panel */}
+        <div
+          id="contact-form"
+          className="bg-white rounded-2xl p-6 md:p-10 lg:p-14 shadow-2xl shadow-black/30"
+        >
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
                 <motion.div
@@ -172,7 +106,7 @@ export default function ContactSection() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                 >
-                  <div className="mb-12">
+                  <div className="mb-10">
                     <h3 className="text-2xl font-black text-primary-navy mb-3">온라인 견적 문의</h3>
                     <p className="text-gray-400 text-[13px] font-medium">필수 정보(*)를 입력하시면 30분 이내에 답변 드립니다.</p>
                   </div>
@@ -188,7 +122,7 @@ export default function ContactSection() {
                           required
                           autoComplete="off"
                           placeholder="담당자명 또는 회사명을 입력하세요"
-                          className="w-full bg-gray-50 border-b-2 border-gray-100 h-10 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-sm"
+                          className={inputClass}
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
@@ -202,7 +136,7 @@ export default function ContactSection() {
                           required
                           placeholder="010-0000-0000"
                           maxLength={13}
-                          className="w-full bg-gray-50 border-b-2 border-gray-100 h-10 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-sm"
+                          className={inputClass}
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })}
                         />
@@ -215,7 +149,7 @@ export default function ContactSection() {
                         <input
                           type="text"
                           placeholder="지역명 또는 상세주소"
-                          className="w-full bg-gray-50 border-b-2 border-gray-100 h-10 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-sm"
+                          className={inputClass}
                           value={formData.startLoc}
                           onChange={(e) => setFormData({ ...formData, startLoc: e.target.value })}
                         />
@@ -225,7 +159,7 @@ export default function ContactSection() {
                         <input
                           type="text"
                           placeholder="지역명 또는 상세주소"
-                          className="w-full bg-gray-50 border-b-2 border-gray-100 h-10 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-sm"
+                          className={inputClass}
                           value={formData.endLoc}
                           onChange={(e) => setFormData({ ...formData, endLoc: e.target.value })}
                         />
@@ -238,7 +172,7 @@ export default function ContactSection() {
                         <input
                           type="text"
                           placeholder="운송 품목 입력"
-                          className="w-full bg-gray-50 border-b-2 border-gray-100 h-10 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-[13px] md:text-sm"
+                          className={inputClass}
                           value={formData.item}
                           onChange={(e) => setFormData({ ...formData, item: e.target.value })}
                         />
@@ -248,7 +182,7 @@ export default function ContactSection() {
                         <input
                           type="text"
                           placeholder="수량 입력"
-                          className="w-full bg-gray-50 border-b-2 border-gray-100 h-10 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-[13px] md:text-sm"
+                          className={inputClass}
                           value={formData.quantity}
                           onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                         />
@@ -258,9 +192,9 @@ export default function ContactSection() {
                     <div className="space-y-2">
                       <label className="text-[15px] font-bold text-primary-navy">상세 문의 내용</label>
                       <textarea
-                        rows={2}
+                        rows={3}
                         placeholder="기타요청 및 특이사항 작성"
-                        className="w-full bg-gray-50 border-b-2 border-gray-100 py-4 px-1 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold resize-none placeholder:text-gray-300 placeholder:font-normal text-[13px] md:text-sm"
+                        className="w-full bg-gray-50 border-b-2 border-gray-100 py-4 px-2 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold resize-none placeholder:text-gray-300 placeholder:font-normal text-sm md:text-base"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       />
@@ -314,7 +248,6 @@ export default function ContactSection() {
               )}
             </AnimatePresence>
           </div>
-        </div>
       </div>
 
       {/* Privacy Policy Modal */}

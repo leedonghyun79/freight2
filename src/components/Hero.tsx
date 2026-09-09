@@ -12,7 +12,11 @@ const images = hero.images;
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 800], [1, 1.1]);
+  const bgScale = useTransform(scrollY, [0, 800], [1, 1.12]);
+  // Parallax curtain: content drifts up slower than scroll and dims as the next section rises over it
+  const contentY = useTransform(scrollY, [0, 700], [0, -140]);
+  const contentOpacity = useTransform(scrollY, [0, 520], [1, 0]);
+  const dimOpacity = useTransform(scrollY, [0, 600], [0, 0.55]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -22,18 +26,16 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-primary-navy z-0"
-    >
-      {/* Background Image Carousel with Dynamic Overlay */}
-      <motion.div style={{ scale }} className="absolute inset-0 z-0 bg-primary-navy">
+    <section className="sticky top-0 min-h-screen flex flex-col justify-center bg-primary-navy overflow-hidden z-0">
+      {/* Full-bleed background image carousel */}
+      <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 bg-primary-navy">
         <AnimatePresence mode="popLayout">
           <motion.div
             key={currentImageIndex}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 2.5, ease: "easeInOut" }}
+            transition={{ duration: 2.2, ease: "easeInOut" }}
             className="absolute inset-0"
           >
             <Image
@@ -41,62 +43,73 @@ export default function Hero() {
               alt={`${siteConfig.brand.nameEn} special cargo transport`}
               fill
               priority
-              className={`object-cover object-center transition-all duration-700 ${currentImageIndex === 1 ? "md:object-left" : "md:object-right"
-                }`}
+              className="object-cover object-center"
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Adjusted Gradients to Reveal the Truck Brand (MAN Logo Area) while protecting text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-black/80 z-10 md:hidden"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-black/80 z-10 hidden md:block"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-primary-navy/80 z-10"></div>
+        {/* Legibility scrims — weighted to the left where the text sits */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-primary-navy/85" />
       </motion.div>
 
-      <motion.div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 w-full flex justify-center md:justify-end mt-[100px] md:mt-0">
-        <motion.div
-          initial={{ opacity: 0, y: 30, x: 0 }}
-          animate={{ opacity: 1, y: 0, x: 0 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="flex flex-col items-center text-center md:items-start md:text-left max-w-4xl"
-        >
-          <span className="text-primary-orange text-xs md:text-sm font-black tracking-[0.4em] uppercase mb-4 md:mb-6 block drop-shadow-md">
+      {/* Ambient accent glow */}
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-primary-orange/15 blur-[150px] pointer-events-none z-[1]" />
+
+      {/* Scroll-driven dim: intensifies as the next section curtains up */}
+      <motion.div
+        style={{ opacity: dimOpacity }}
+        className="absolute inset-0 bg-primary-navy z-30 pointer-events-none"
+      />
+
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="relative z-20 w-full pt-28 md:pt-24"
+      >
+        {/* Type block */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+          <span className="text-primary-orange text-[11px] md:text-sm font-black tracking-[0.4em] uppercase mb-5 md:mb-7 block drop-shadow">
             {hero.eyebrow}
           </span>
 
-          <h1 className="text-[28px] md:text-[64px] font-outfit font-black text-white leading-[1.2] md:leading-[1.1] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] break-keep">
+          <h1 className="font-outfit font-black text-white tracking-tight break-keep drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]">
             {hero.titleLines.map((line, i) => (
-              <span key={i}>
+              <span
+                key={i}
+                className="block text-[clamp(1.75rem,5.4vw,3.625rem)] leading-[1.14]"
+              >
                 {line}
-                <br />
               </span>
             ))}
-            <span className="text-primary-orange text-[32px] md:text-[72px]">{hero.highlight}</span>
+            <span className="block text-primary-orange text-[clamp(1.75rem,5.4vw,3.625rem)] leading-[1.14]">
+              {hero.highlight}
+            </span>
           </h1>
 
-          <p className="text-[14px] md:text-[20px] text-gray-100 font-medium mb-10 md:mb-12 max-w-2xl leading-relaxed drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] opacity-90 break-keep">
+          <div className="mt-7 md:mt-9 max-w-2xl space-y-1.5">
             {hero.description.map((line, i) => (
-              <span key={i}>
+              <p
+                key={i}
+                className="text-[13px] md:text-[18px] text-gray-200 font-medium leading-relaxed break-keep drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]"
+              >
                 {line}
-                {i < hero.description.length - 1 && <br />}
-              </span>
+              </p>
             ))}
-          </p>
+          </div>
 
-          <div className="flex flex-row justify-center md:justify-start items-center gap-3 md:gap-4 w-full">
+          <div className="mt-9 md:mt-11 flex flex-row items-center gap-3 md:gap-4">
             <a
               href={contact.kakaoUrl}
               target="_blank"
               onClick={() => trackConversion()}
-              className="flex-1 md:flex-none px-4 md:px-10 py-3.5 md:py-5 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/40 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap"
+              className="flex-1 md:flex-none px-4 md:px-10 py-3.5 md:py-5 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/30 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap"
             >
               빠른 견적 문의
             </a>
             <a
               href={`tel:${contact.phoneTel}`}
               onClick={() => trackConversion()}
-              className="flex-1 md:flex-none px-2 md:px-10 py-3.5 md:py-5 border border-white/50 bg-transparent text-white rounded-lg hover:bg-white/10 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center"
+              className="flex-1 md:flex-none px-2 md:px-10 py-3.5 md:py-5 border border-white/40 bg-white/5 backdrop-blur-sm text-white rounded-lg hover:bg-white/15 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center"
             >
               <div className="flex flex-row items-center gap-1.5 md:gap-2 leading-none">
                 <span className="text-[11px] md:text-[15px] text-white/80 md:text-white font-medium">고객센터</span>
@@ -104,54 +117,45 @@ export default function Hero() {
               </div>
             </a>
           </div>
-
-          {/* Mobile Scroll Indicator (Below Buttons) */}
-          <div className="flex flex-col items-center gap-4 mt-12 md:hidden">
-            <div className="w-[20px] h-[34px] border-2 border-white/30 rounded-full flex justify-center p-1">
-              <motion.div
-                animate={{
-                  y: [0, 12, 0],
-                  opacity: [1, 0, 1]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="w-1 h-1 bg-white rounded-full"
-              />
-            </div>
-            <span className="text-[10px] text-white font-bold tracking-[0.3em] uppercase">
-              SCROLL DOWN
-            </span>
-          </div>
-        </motion.div>
+        </div>
       </motion.div>
 
-      {/* Desktop Left-side Vertical Scroll Indicator */}
-      <div className="absolute left-8 bottom-10 hidden md:flex flex-col items-center gap-8 z-20">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-[1px] h-20 bg-gradient-to-b from-transparent to-white/50"></div>
-          <span className="text-[10px] text-white font-bold tracking-[0.3em] uppercase [writing-mode:vertical-lr] rotate-180">
-            SCROLL DOWN
-          </span>
+      {/* Image index + ticks */}
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="absolute bottom-8 left-6 lg:left-[max(1.5rem,calc((100vw-80rem)/2+3rem))] z-20 flex items-center gap-3"
+      >
+        <div className="flex gap-1.5">
+          {images.map((_, i) => (
+            <span
+              key={i}
+              className={`h-[3px] w-6 rounded-full transition-colors ${
+                i === currentImageIndex ? "bg-primary-orange" : "bg-white/30"
+              }`}
+            />
+          ))}
         </div>
+        <span className="font-outfit font-black text-white text-xs tabular-nums drop-shadow">
+          {String(currentImageIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+        </span>
+      </motion.div>
 
-        <div className="w-[20px] h-[34px] border-2 border-white/30 rounded-full flex justify-center p-1 group">
+      {/* Desktop Right-side Scroll Indicator — orange pulse running down a hairline rail */}
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="absolute right-8 bottom-10 hidden lg:flex flex-col items-center gap-3 z-20"
+      >
+        <span className="text-[10px] font-bold tracking-[0.35em] uppercase text-white/45 [writing-mode:vertical-rl]">
+          Scroll
+        </span>
+        <div className="relative w-[4px] h-16 rounded-full bg-white/15 overflow-hidden">
           <motion.div
-            animate={{
-              y: [0, 12, 0],
-              opacity: [1, 0, 1]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="w-1 h-1 bg-white rounded-full"
+            animate={{ y: ["-100%", "400%"] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeIn" }}
+            className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-transparent via-primary-orange to-transparent"
           />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

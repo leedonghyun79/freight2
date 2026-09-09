@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { siteConfig } from "@/config/site.config";
 
 const items = [
   {
@@ -19,59 +20,74 @@ const items = [
   {
     title: "제품안전포장 및 완충시스템",
     description: "정전기 방지 포장 및 제품결박시 완충스펀지 포장결박으로 제품보호를 완료했습니다. 미술품 및 문화재 전문 포장팀운영",
-  }
+  },
 ];
 
 export default function MiddleSection() {
   return (
-    <section id="about" className="relative py-32 overflow-hidden scroll-mt-24">
-      {/* Background with Dark Overlay */}
-      <div className="absolute inset-0 z-0 scale-110">
+    <section
+      id="about"
+      className="relative z-10 bg-primary-navy py-24 md:py-36 overflow-hidden scroll-mt-24 shadow-[0_-24px_60px_-12px_rgba(0,0,0,0.45)]"
+    >
+      {/* Faint hero image backdrop */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/images/메인대표사진1.jpg"
-          alt="Company Scale Representation"
+          src={siteConfig.hero.images[0]}
+          alt=""
           fill
-          className="object-cover"
+          sizes="100vw"
+          className="object-cover opacity-[0.12]"
         />
-        <div className="absolute inset-0 bg-primary-navy/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-navy/80 via-primary-navy/60 to-primary-navy/90" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="text-center mb-10 md:mb-16 max-w-4xl mx-auto">
-          <span className="text-gray-300 font-bold text-sm tracking-widest uppercase mb-[5px] md:mb-4 block">
-            WHY US
-          </span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-[36px] font-outfit font-black text-white mb-8 tracking-tight"
-          >
-            <span>고가의 장비,<br />그 가치를 그대로 전합니다.</span>
-          </motion.h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-[15px]">
-          {items.map((item, idx) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20">
+          {/* Left: Sticky Statement */}
+          <div className="lg:sticky lg:top-32 self-start">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-primary-orange font-bold text-xs tracking-[0.2em] uppercase">
+                Why Us
+              </span>
+              <span className="h-px w-12 bg-primary-orange" />
+            </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group"
+              className="text-white font-outfit font-black tracking-tight leading-[1.15] text-[32px] md:text-[44px] lg:text-[52px] break-keep"
             >
-              <div className="border-l border-white/20 pl-8 h-full py-5 md:py-0">
-                <h3 className="text-[18px] font-bold text-white mb-2 group-hover:text-primary-orange transition-colors flex items-start break-keep">
-                  {item.title}
-                </h3>
-                <p 
-                  className="text-gray-400 text-[15px] leading-relaxed break-keep"
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                />
-              </div>
-            </motion.div>
-          ))}
+              고가의 장비,
+              <br />그 가치를 그대로 전합니다.
+            </motion.h2>
+          </div>
+
+          {/* Right: Numbered rows */}
+          <div>
+            {items.map((item, idx) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
+                className="group grid grid-cols-[auto_1fr] gap-5 md:gap-8 py-8 md:py-10 border-t border-white/10 first:border-t-0 first:pt-0"
+              >
+                <span className="font-outfit font-black text-primary-orange text-xl md:text-2xl tabular-nums leading-none pt-1">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="text-white text-lg md:text-xl font-bold mb-3 break-keep group-hover:text-primary-orange transition-colors">
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-gray-400 text-[15px] leading-relaxed break-keep"
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

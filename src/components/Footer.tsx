@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, MapPin, Phone, Mail, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site.config";
@@ -55,88 +55,60 @@ export default function Footer() {
   const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);
 
   return (
-    <footer className="bg-[#111316] text-white pt-20 pb-12 overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-orange/5 blur-[120px] pointer-events-none"></div>
+    <footer className="bg-[#111316] text-white pt-16 pb-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Logo */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="block"
+        >
+          <BrandLogo variant="dark" />
+        </button>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-24 mb-16">
-          <div className="lg:w-1/3">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="mb-8 block"
-            >
-              <BrandLogo variant="dark" />
-            </button>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-8 break-keep">
-              {brand.nameKo}은 반도체·의료기기·정밀장비 등 고가의 정밀 자산을 전문 기술 인력과 실시간 관제 시스템을 통해 가장 안전하게 운송합니다.
-            </p>
+        {/* Info */}
+        <div className="mt-8 pt-8 border-t border-white/10 space-y-3 text-[13px] text-gray-400">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+            <span className="text-white font-bold">{brand.nameKo}</span>
+            <span>
+              <span className="text-gray-300 font-bold">대표.</span> {company.ceo}
+            </span>
+            <span>
+              <span className="text-gray-300 font-bold">사업자번호.</span> {company.bizNo}
+            </span>
           </div>
 
-          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h4 className="text-white text-xs font-black uppercase tracking-widest mb-8 flex items-center">
-                <span className="w-2 h-2 rounded-full bg-primary-orange mr-3"></span>
-                Contact Information
-              </h4>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1 text-primary-orange"><Phone size={18} /></div>
-                  <div>
-                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Representative Number</div>
-                    <div className="text-lg font-black text-white">{contact.phoneDisplay}</div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1 text-primary-orange"><Mail size={18} /></div>
-                  <div>
-                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Email Support</div>
-                    <div className="text-sm font-bold text-gray-300">{contact.email}</div>
-                  </div>
-                </div>
-              </div>
+          <div className="flex flex-wrap gap-x-8 gap-y-1">
+            {company.addresses.map((a) => (
+              <span key={a.label}>
+                <span className="text-gray-300 font-bold">{a.label}:</span> {a.value}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pt-2">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+              <span>
+                <span className="text-gray-300 font-bold">E-MAIL.</span> {contact.email}
+              </span>
+              <span className="flex items-center gap-3 text-gray-500">
+                <button
+                  onClick={() => setModalType("privacy")}
+                  className="hover:text-primary-orange transition-colors"
+                >
+                  개인정보처리방침
+                </button>
+                <span className="text-gray-700">|</span>
+                <button
+                  onClick={() => setModalType("terms")}
+                  className="hover:text-primary-orange transition-colors"
+                >
+                  이용약관
+                </button>
+              </span>
             </div>
-
-            <div>
-              <h4 className="text-white text-xs font-black uppercase tracking-widest mb-8 flex items-center">
-                <span className="w-2 h-2 rounded-full bg-primary-orange mr-3"></span>
-                Business Center
-              </h4>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1 text-primary-orange"><MapPin size={18} /></div>
-                  <div>
-                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Office Location</div>
-                    <div className="text-sm font-bold text-gray-300 leading-relaxed">
-                      {company.addresses.map((a) => (
-                        <div key={a.label}>
-                          {a.label}: {a.value}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="mt-1 text-primary-orange"><Building2 size={18} /></div>
-                  <div>
-                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Registration Details</div>
-                    <div className="text-sm font-bold text-gray-300">
-                      대표: {company.ceo}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase">
-          <div className="flex space-x-4 mb-4 md:mb-0 items-center">
-            <button onClick={() => setModalType("privacy")} className="hover:text-primary-orange transition-colors">개인정보처리방침</button>
-            <span className="text-gray-800 font-normal">|</span>
-            <button onClick={() => setModalType("terms")} className="hover:text-primary-orange transition-colors">이용약관</button>
-          </div>
-          <div className="flex items-center space-x-4">
-            <span>© {new Date().getFullYear()} {brand.nameEn}. <br className="md:hidden" /> ALL RIGHTS RESERVED.</span>
+            <span className="text-[11px] text-gray-600 tracking-[0.15em] uppercase">
+              Copyright {brand.nameKo}. All Rights Reserved.
+            </span>
           </div>
         </div>
       </div>

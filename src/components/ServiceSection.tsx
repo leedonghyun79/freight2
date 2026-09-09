@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -50,119 +50,127 @@ const services = [
 ];
 
 export default function ServiceSection() {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   return (
-    <section id="services" className="py-20 md:py-28 bg-white overflow-hidden scroll-mt-24">
+    <section
+      id="services"
+      className="py-20 md:py-28 bg-white overflow-hidden scroll-mt-24"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Section Header */}
-        <div className="text-center mb-10 md:mb-16 px-6">
-          <span className="text-gray-400 font-bold text-sm tracking-widest uppercase mb-[5px] md:mb-4 block">
-            MAJOR FIELDS
-          </span>
+        {/* Header */}
+        <div className="mb-10 md:mb-14">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-gray-400 font-bold text-sm tracking-[0.2em] uppercase">
+              Major Fields
+            </span>
+            <span className="h-px w-12 bg-gray-400" />
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[24px] md:text-[36px] font-outfit font-black text-primary-navy tracking-tight"
+            className="text-[26px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep"
           >
             주요 <span className="text-primary-orange">운송 분야</span>
           </motion.h2>
         </div>
 
-        {/* Desktop Tabs (Navigation) */}
-        <div className="hidden md:flex flex-wrap justify-center gap-x-[65px] gap-y-3 mb-10">
+        {/* Desktop: expanding accordion row */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="hidden md:flex gap-3 h-[520px]"
+          onMouseLeave={() => setActiveIdx(null)}
+        >
           {services.map((service, idx) => {
-            const isActive = activeIdx === idx;
+            const active = activeIdx === idx;
             return (
-              <button
+              <article
                 key={service.title}
-                onClick={() => setActiveIdx(idx)}
-                className="group relative flex flex-col items-center pb-2 transition-all"
+                onMouseEnter={() => setActiveIdx(idx)}
+                style={{
+                  flexGrow: active ? 3 : 1,
+                  flexBasis: 0,
+                  willChange: "flex-grow",
+                }}
+                className="relative min-w-0 rounded-2xl overflow-hidden bg-primary-navy ring-1 ring-black/5 cursor-pointer transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
               >
-                <span className={`text-sm lg:text-base font-bold transition-all duration-300 ${isActive ? "text-primary-navy scale-110" : "text-gray-400 hover:text-primary-navy"
-                  }`}>
-                  {service.title}
-                </span>
-                {isActive && (
-                  <motion.div
-                    layoutId="active-nav-line"
-                    className="absolute -bottom-1 left-0 right-0 h-[3px] bg-primary-orange rounded-full"
-                  />
-                )}
-              </button>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-width: 1024px) 40vw, 600px"
+                  className={`object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    active ? "scale-105 opacity-70" : "scale-100 opacity-90"
+                  }`}
+                />
+                <div
+                  className={`absolute inset-0 transition-opacity duration-500 bg-gradient-to-t ${
+                    active
+                      ? "from-black/95 via-black/60 to-black/25"
+                      : "from-black/80 via-black/15 to-transparent"
+                  }`}
+                />
+
+                {/* Text block — always mounted; only opacity/transform animate (no layout thrash) */}
+                <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8 text-white pointer-events-none">
+                  <div
+                    className={`w-[280px] lg:w-[360px] mb-3 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                    }`}
+                  >
+                    <p className="text-primary-orange text-sm lg:text-base font-bold mb-2 break-keep">
+                      {service.description}
+                    </p>
+                    <p className="text-gray-200 text-[13px] lg:text-sm leading-relaxed break-keep">
+                      {service.longDesc}
+                    </p>
+                  </div>
+
+                  <h3 className="font-black tracking-tight break-keep text-xl lg:text-2xl">
+                    {service.title}
+                  </h3>
+                </div>
+              </article>
             );
           })}
-        </div>
+        </motion.div>
 
-        {/* Desktop Main Content Card (Slide) */}
-        <div className="hidden md:block relative h-[600px] w-full bg-primary-navy rounded-[40px] overflow-hidden shadow-xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIdx}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={services[activeIdx].image}
-                alt={services[activeIdx].title}
-                fill
-                className="object-cover opacity-60"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col items-center justify-center text-center px-20 text-white">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <h3 className="text-5xl font-black mb-6 leading-tight">
-                    {services[activeIdx].title}
-                  </h3>
-                  <p className="max-w-3xl mx-auto text-primary-orange text-2xl mb-6 font-bold leading-relaxed break-keep">
-                    {services[activeIdx].description}
-                  </p>
-                  <p className="max-w-3xl mx-auto text-gray-300 text-lg mb-0 leading-relaxed font-light opacity-90 break-keep">
-                    {services[activeIdx].longDesc}
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Mobile View: All Items as Cards */}
-        <div className="md:hidden flex flex-col gap-6">
+        {/* Mobile: stacked cards */}
+        <div className="md:hidden flex flex-col gap-5">
           {services.map((service, idx) => (
-            <motion.div
+            <motion.article
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="relative min-h-[300px] h-auto w-full bg-primary-navy rounded-[30px] overflow-hidden shadow-xl"
+              transition={{ delay: idx * 0.06 }}
+              className="relative rounded-2xl overflow-hidden bg-primary-navy ring-1 ring-black/5"
             >
-              <Image
-                src={service.image}
-                alt={service.title}
-                fill
-                className="object-cover opacity-50"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/30 flex flex-col justify-end p-8 py-10 text-white">
-                <h3 className="text-[22px] font-black mb-2.5 text-primary-orange tracking-tight">
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="100vw"
+                  className="object-cover opacity-70"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <h3 className="absolute inset-x-0 bottom-0 p-5 text-white text-xl font-black tracking-tight break-keep">
                   {service.title}
                 </h3>
-                <p className="text-[15px] font-bold mb-4 leading-snug break-keep text-white/95">
+              </div>
+              <div className="p-5 text-white/90">
+                <p className="text-primary-orange text-[14px] font-bold mb-2 break-keep">
                   {service.description}
                 </p>
-                <div className="w-12 h-[1px] bg-white/20 mb-4" />
-                <p className="text-[13px] text-gray-400 font-medium leading-relaxed break-keep">
+                <p className="text-gray-400 text-[13px] leading-relaxed break-keep">
                   {service.longDesc}
                 </p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

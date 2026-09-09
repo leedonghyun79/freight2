@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -80,80 +80,82 @@ const cases = [
 
 export default function PortfolioCarousel() {
   return (
-    <section id="portfolio" className="py-28 bg-white overflow-hidden scroll-mt-24">
+    <section id="portfolio" className="py-20 md:py-28 bg-white overflow-x-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Standardized Section Header with Navigation */}
-        <div className="flex flex-row justify-between items-end mb-10 md:mb-16">
-          <div className="flex-1">
-            <span className="text-gray-400 font-bold text-xs md:text-sm tracking-widest uppercase mb-[5px] md:mb-4 block">
-              ACTUAL CASES
-            </span>
-            <h2 className="text-2xl md:text-[36px] font-black text-primary-navy tracking-tight whitespace-nowrap">
+        {/* Header */}
+        <div className="flex flex-row justify-between items-end mb-10 md:mb-14">
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-gray-400 font-bold text-sm tracking-[0.2em] uppercase">
+                Actual Cases
+              </span>
+              <span className="h-px w-12 bg-gray-400" />
+            </div>
+            <h2 className="text-[26px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep">
               실제 <span className="text-primary-orange">운송 사례</span>
             </h2>
           </div>
 
-          {/* Header Navigation Buttons */}
-          <div className="flex items-center space-x-2 md:space-x-3">
+          <div className="flex items-center gap-3">
             <button
               id="work-prev"
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-primary-navy hover:text-white hover:border-primary-navy transition-all duration-300 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="이전 사례"
+              className="w-11 h-11 flex items-center justify-center text-primary-navy hover:text-primary-orange transition-colors cursor-pointer"
             >
-              <ChevronLeft size={20} />
+              <ArrowLeft size={22} />
             </button>
             <button
               id="work-next"
-              className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:bg-primary-navy hover:text-white hover:border-primary-navy transition-all duration-300 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="다음 사례"
+              className="w-11 h-11 flex items-center justify-center text-primary-navy hover:text-primary-orange transition-colors cursor-pointer"
             >
-              <ChevronRight size={20} />
+              <ArrowRight size={22} />
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Carousel Container */}
-        <div className="relative">
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            spaceBetween={24}
-            slidesPerView="auto" // Changed to auto to support fixed width slides
-            loop={true}
-            navigation={{
-              prevEl: "#work-prev",
-              nextEl: "#work-next",
-            }}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
-            className="w-full pb-10"
-          >
-            {cases.map((item) => (
-              <SwiperSlide key={item.id} className="!w-[320px]">
-                <div className="bg-white rounded-lg overflow-hidden border border-gray-100 transition-all hover:shadow-xl group/card h-[408px] flex flex-col">
-                  {/* Image Container */}
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover/card:scale-110"
-                    />
-                  </div>
-                  {/* Content Area */}
-                  <div className="p-5 flex-grow border-t border-gray-50">
-                    <h3 className="text-[20px] font-bold text-gray-900 mb-2">
+      {/* Full-bleed rail */}
+      <div className="pl-6 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))]">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={20}
+          slidesPerView="auto"
+          loop={true}
+          navigation={{ prevEl: "#work-prev", nextEl: "#work-next" }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          className="w-full pb-6"
+        >
+          {cases.map((item) => (
+            <SwiperSlide key={item.id} className="!w-[300px] md:!w-[420px]">
+              <article className="group relative bg-transparent">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="420px"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                    <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-white/60 mb-2 block">
+                      {item.category}
+                    </span>
+                    <h3 className="text-lg md:text-xl font-black tracking-tight break-keep">
                       {item.title}
                     </h3>
-                    {/* Added description subtly for context */}
-                    <p className="mt-3 text-[15px] text-gray-400 leading-relaxed">
-                      {item.description}
-                    </p>
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+                <div className="pt-4">
+                  <p className="text-[14px] text-gray-500 leading-relaxed break-keep line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
+              </article>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );
