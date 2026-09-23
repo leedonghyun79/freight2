@@ -102,14 +102,14 @@ export default function Hero() {
               href={contact.kakaoUrl}
               target="_blank"
               onClick={() => trackConversion()}
-              className="flex-1 md:flex-none px-4 md:px-10 py-3.5 md:py-5 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/30 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap"
+              className="flex-1 md:flex-none h-[54px] px-4 md:px-10 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/30 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap box-border"
             >
               빠른 견적 문의
             </a>
             <a
               href={`tel:${contact.phoneTel}`}
               onClick={() => trackConversion()}
-              className="flex-1 md:flex-none px-2 md:px-10 py-3.5 md:py-5 border border-white/40 bg-white/5 backdrop-blur-sm text-white rounded-lg hover:bg-white/15 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center"
+              className="flex-1 md:flex-none h-[54px] px-3 md:px-10 border border-white/40 bg-white/5 backdrop-blur-sm text-white rounded-lg hover:bg-white/15 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center box-border"
             >
               <div className="flex flex-row items-center gap-1.5 md:gap-2 leading-none">
                 <span className="text-[11px] md:text-[15px] text-white/80 md:text-white font-medium">고객센터</span>
