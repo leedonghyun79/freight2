@@ -85,7 +85,7 @@ export const siteConfig: SiteConfig = {
       { icon: "truck", label: "무진동 배차", value: "1분 내" },
       { icon: "thermometer", label: "항온항습", value: "24/7" },
     ],
-    images: ["/images/메인트럭사진.jpg", "/images/메인대표사진1.jpg"],
+    images: ["/images/hero_truck_v4.jpg", "/images/hero_truck_night.jpg"],
   },
   nav: [
     { name: "회사 소개", href: "#about" },
@@ -109,6 +109,6 @@ export const siteConfig: SiteConfig = {
       "한국정밀운송은 반도체·의료기기·정밀장비 등 고가 자산을 무진동 항온항습 리프트 차량으로 안전하게 운송합니다.",
     keywords:
       "특수운송, 무진동운송, 정밀장비운송, 반도체장비운송, 의료기기운송, 항온항습운송, 장비이전, 데이터센터이전",
-    ogImage: "/images/메인트럭사진.jpg",
+    ogImage: "/images/hero_truck_v4.jpg",
   },
 };
