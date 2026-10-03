@@ -64,7 +64,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
-                  "text-[13px] font-bold transition-colors hover:text-primary-orange uppercase tracking-wider cursor-pointer",
+                  "text-[15px] font-bold transition-colors hover:text-primary-orange uppercase tracking-wider cursor-pointer",
                   isContact
                     ? "text-primary-orange"
                     : isScrolled
