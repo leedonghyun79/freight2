@@ -73,24 +73,40 @@ export default function ContactSection() {
     "w-full bg-gray-50 border-b-2 border-gray-100 h-14 px-2 focus:outline-none focus:border-primary-orange transition-all text-primary-navy font-bold placeholder:text-gray-300 placeholder:font-normal text-base";
 
   return (
-    <section id="contact" className="bg-primary-navy py-20 md:py-32 scroll-mt-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Statement */}
-        <div className="text-white text-left mb-10 md:mb-12 max-w-2xl">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-primary-orange text-xs font-black tracking-[0.2em] uppercase">
-              Inquiry
-            </span>
-            <span className="h-px w-12 bg-primary-orange" />
+    <section id="contact" className="relative bg-primary-navy py-20 md:py-32 scroll-mt-24 overflow-hidden">
+      {/* 은은한 앰비언트 라이트 배경 */}
+      <div className="absolute inset-0 pointer-events-none select-none z-0 overflow-hidden">
+        {/* 좌측 상단 앰비언트 오렌지 글로우 */}
+        <div className="absolute -top-24 -left-24 w-[550px] h-[550px] bg-primary-orange/[0.12] rounded-full blur-[140px]" />
+
+        {/* 우측 중앙 앰비언트 글로우 */}
+        <div className="absolute top-1/2 -right-24 -translate-y-1/2 w-[650px] h-[650px] bg-sky-500/[0.06] rounded-full blur-[160px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Header: Left Title + Right Description */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
+          {/* Left Title */}
+          <div className="text-white text-left max-w-xl">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-primary-orange text-xs font-black tracking-[0.2em] uppercase">
+                Inquiry
+              </span>
+              <span className="h-px w-12 bg-primary-orange" />
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-[52px] font-outfit font-black leading-[1.15] tracking-tight break-keep">
+              고객 맞춤 <br />
+              <span className="text-primary-orange">운송 솔루션</span>
+            </h2>
           </div>
-          <h2 className="text-3xl lg:text-[52px] font-outfit font-black leading-[1.15] tracking-tight mb-6 break-keep">
-            고객 맞춤 <br />
-            <span className="text-primary-orange">운송 솔루션</span>
-          </h2>
-          <p className="text-gray-400 text-sm leading-relaxed font-medium break-keep">
-            {company.supportNote} <br />
-            지금 바로 전문가와 상담하세요.
-          </p>
+
+          {/* Right Description */}
+          <div className="md:text-right max-w-md pb-1">
+            <p className="text-gray-300 text-sm md:text-base leading-relaxed font-medium break-keep">
+              {company.supportNote} <br />
+              <span className="text-gray-400">지금 바로 전문가와 상담하세요.</span>
+            </p>
+          </div>
         </div>
 
         {/* Form panel */}
@@ -98,18 +114,18 @@ export default function ContactSection() {
           id="contact-form"
           className="bg-white rounded-2xl p-6 md:p-10 lg:p-14 shadow-2xl shadow-black/30"
         >
-            <AnimatePresence mode="wait">
-              {!isSubmitted ? (
-                <motion.div
-                  key="form"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                >
-                  <div className="mb-10">
-                    <h3 className="text-2xl font-black text-primary-navy mb-3">온라인 견적 문의</h3>
-                    <p className="text-gray-400 text-[13px] font-medium">필수 정보(*)를 입력하시면 30분 이내에 답변 드립니다.</p>
-                  </div>
+          <AnimatePresence mode="wait">
+            {!isSubmitted ? (
+              <motion.div
+                key="form"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+              >
+                <div className="mb-10">
+                  <h3 className="text-2xl font-black text-primary-navy mb-3">온라인 견적 문의</h3>
+                  <p className="text-gray-400 text-[13px] font-medium">필수 정보(*)를 입력하시면 30분 이내에 답변 드립니다.</p>
+                </div>
 
                   <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

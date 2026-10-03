@@ -123,7 +123,7 @@ export default function Hero() {
       {/* Image index + ticks */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="absolute bottom-8 left-6 lg:left-[max(1.5rem,calc((100vw-80rem)/2+3rem))] z-20 flex items-center gap-3"
+        className="absolute bottom-28 lg:bottom-32 left-6 lg:left-[max(1.5rem,calc((100vw-80rem)/2+3rem))] z-20 flex items-center gap-3"
       >
         <div className="flex gap-1.5">
           {images.map((_, i) => (
@@ -143,7 +143,7 @@ export default function Hero() {
       {/* Desktop Right-side Scroll Indicator — orange pulse running down a hairline rail */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="absolute right-8 bottom-10 hidden lg:flex flex-col items-center gap-3 z-20"
+        className="absolute right-8 bottom-28 lg:bottom-32 hidden lg:flex flex-col items-center gap-3 z-20"
       >
         <span className="text-[10px] font-bold tracking-[0.35em] uppercase text-white/45 [writing-mode:vertical-rl]">
           Scroll
