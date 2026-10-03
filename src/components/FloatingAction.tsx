@@ -5,13 +5,11 @@ import { MessageCircle, Phone, ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { siteConfig } from "@/config/site.config";
 import { trackConversion } from "@/lib/track";
-import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const { contact } = siteConfig;
 
 export default function FloatingAction() {
   const [isVisible, setIsVisible] = useState(false);
-  const bannerShown = useScrollReveal(400); // 하단 CTA 배너가 뜨면 위로 비켜줌
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,11 +24,7 @@ export default function FloatingAction() {
   };
 
   return (
-    <div
-      className={`fixed right-[20px] z-[100] flex flex-col items-end space-y-4 transition-all duration-300 ${
-        bannerShown ? "bottom-[116px] lg:bottom-[88px]" : "bottom-8"
-      }`}
-    >
+    <div className="fixed right-[20px] z-[100] flex flex-col items-end space-y-4 bottom-[136px] sm:bottom-[110px] lg:bottom-[104px] transition-all duration-300">
       <AnimatePresence>
         {isVisible && (
           <motion.div
