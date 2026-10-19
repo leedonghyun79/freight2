@@ -50,7 +50,8 @@ const services = [
 ];
 
 export default function ServiceSection() {
-  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  // 첫 번째 분야를 기본으로 펼쳐 둔다
+  const [activeIdx, setActiveIdx] = useState<number>(0);
 
   return (
     <section
@@ -76,13 +77,13 @@ export default function ServiceSection() {
           </motion.h2>
         </div>
 
-        {/* Desktop: expanding accordion row */}
+        {/* Desktop: 세로 타이틀 바 — hover하면 펼쳐져 영문 라벨·제목·설명 노출 */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="hidden md:flex gap-3 h-[520px]"
-          onMouseLeave={() => setActiveIdx(null)}
+          onMouseLeave={() => setActiveIdx(0)}
         >
           {services.map((service, idx) => {
             const active = activeIdx === idx;
@@ -91,7 +92,7 @@ export default function ServiceSection() {
                 key={service.title}
                 onMouseEnter={() => setActiveIdx(idx)}
                 style={{
-                  flexGrow: active ? 3 : 1,
+                  flexGrow: active ? 6 : 1,
                   flexBasis: 0,
                   willChange: "flex-grow",
                 }}
@@ -101,37 +102,46 @@ export default function ServiceSection() {
                   src={service.image}
                   alt={service.title}
                   fill
-                  sizes="(max-width: 1024px) 40vw, 600px"
+                  sizes="(max-width: 1024px) 55vw, 760px"
                   className={`object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    active ? "scale-105 opacity-70" : "scale-100 opacity-90"
+                    active ? "scale-105 opacity-70" : "scale-100 opacity-60"
                   }`}
                 />
                 <div
                   className={`absolute inset-0 transition-opacity duration-500 bg-gradient-to-t ${
                     active
-                      ? "from-black/95 via-black/60 to-black/25"
-                      : "from-black/80 via-black/15 to-transparent"
+                      ? "from-black/95 via-black/50 to-black/10"
+                      : "from-black/85 via-black/40 to-black/60"
                   }`}
                 />
 
-                {/* Text block — always mounted; only opacity/transform animate (no layout thrash) */}
-                <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8 text-white pointer-events-none">
-                  <div
-                    className={`w-[280px] lg:w-[360px] mb-3 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-                    }`}
-                  >
-                    <p className="text-primary-orange text-sm lg:text-base font-bold mb-2 break-keep">
-                      {service.description}
-                    </p>
-                    <p className="text-gray-200 text-[13px] lg:text-sm leading-relaxed break-keep">
-                      {service.longDesc}
-                    </p>
+                {/* 접힌 상태: 세로쓰기 타이틀 — 펼쳐지면 즉시 제거 */}
+                {!active && (
+                  <div className="absolute inset-0 flex items-end justify-center pb-12 pointer-events-none">
+                    <span
+                      style={{ writingMode: "vertical-rl", wordSpacing: "0.6em" }}
+                      className="text-white font-black text-xl lg:text-2xl tracking-[0.2em] whitespace-nowrap"
+                    >
+                      {service.title}
+                    </span>
                   </div>
+                )}
 
-                  <h3 className="font-black tracking-tight break-keep text-xl lg:text-2xl">
+                {/* 펼친 상태: 영문 라벨 → 제목 → 설명 — 항상 마운트, opacity/transform만 애니메이션 */}
+                <div
+                  className={`absolute inset-x-0 bottom-0 p-8 lg:p-10 text-white pointer-events-none transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                  }`}
+                >
+                  <span className="block text-primary-orange text-xs lg:text-sm font-bold tracking-[0.2em] uppercase mb-3">
+                    {service.shortTitle}
+                  </span>
+                  <h3 className="font-black tracking-tight break-keep text-2xl lg:text-3xl mb-4">
                     {service.title}
                   </h3>
+                  <p className="text-gray-200 text-[14px] lg:text-[15px] leading-relaxed break-keep max-w-[460px]">
+                    {service.description}
+                  </p>
                 </div>
               </article>
             );
