@@ -55,7 +55,7 @@ export default function Footer() {
   const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);
 
   return (
-    <footer className="bg-[#111316] text-white pt-16 pb-28 sm:pb-24">
+    <footer className="bg-[#111316] text-white pt-16 pb-64 sm:pb-60 lg:pb-28">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Logo */}
         <button

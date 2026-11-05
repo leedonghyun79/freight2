@@ -85,10 +85,10 @@ export default function ContactSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header: Left Title + Right Description */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-6 mb-10 md:mb-12">
           {/* Left Title */}
           <div className="text-white text-left max-w-xl">
-            <h2 className="text-3xl md:text-4xl lg:text-[52px] font-outfit font-black leading-[1.15] tracking-tight break-keep">
+            <h2 className="text-[26px] md:text-4xl lg:text-[52px] font-outfit font-black leading-[1.2] tracking-tight break-keep">
               고객 맞춤 <br />
               <span className="text-primary-orange">운송 솔루션</span>
             </h2>
@@ -96,7 +96,7 @@ export default function ContactSection() {
 
           {/* Description */}
           <div className="text-left max-w-md pb-1">
-            <p className="text-gray-300 text-[18px] leading-relaxed font-medium break-keep">
+            <p className="text-gray-300 text-[15px] md:text-[18px] leading-relaxed font-medium break-keep">
               {company.supportNote} <br />
               <span className="text-gray-400">지금 바로 전문가와 상담하세요.</span>
             </p>
@@ -117,7 +117,7 @@ export default function ContactSection() {
                 exit={{ opacity: 0, x: -20 }}
               >
                 <div className="mb-10">
-                  <h3 className="text-2xl font-black text-primary-navy mb-3">온라인 견적 문의</h3>
+                  <h3 className="text-xl md:text-2xl font-black text-primary-navy mb-3">온라인 견적 문의</h3>
                   <p className="text-gray-400 text-[13px] font-medium">견적을 요청하시면 30분 이내에 답변드립니다.</p>
                 </div>
 
@@ -231,7 +231,7 @@ export default function ContactSection() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className={`px-10 py-5 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary-navy hover:bg-black'} text-white rounded-2xl font-black flex items-center justify-center group transition-all shadow-xl shadow-primary-navy/20`}
+                        className={`w-full sm:w-auto px-6 md:px-10 py-3.5 md:py-5 text-[15px] md:text-base ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary-navy hover:bg-black'} text-white rounded-xl md:rounded-2xl font-black flex items-center justify-center group transition-all shadow-xl shadow-primary-navy/20`}
                       >
                         {isSubmitting ? '전송 중...' : '신청하기'}
                         <ChevronRight size={20} className={`ml-2 ${!isSubmitting && 'group-hover:translate-x-1'} transition-transform`} />

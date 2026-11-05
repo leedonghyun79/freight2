@@ -49,7 +49,7 @@ export default function MiddleSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-white font-outfit font-black tracking-tight leading-[1.15] text-[32px] md:text-[44px] lg:text-[52px] break-keep"
+              className="text-white font-outfit font-black tracking-tight leading-[1.2] text-[26px] md:text-[44px] lg:text-[52px] break-keep"
             >
               고가의 장비,
               <br /><span className="text-primary-orange">그 가치를</span> 그대로 전합니다.
@@ -71,11 +71,11 @@ export default function MiddleSection() {
                   {String(idx + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="text-white text-lg md:text-xl font-bold mb-3 break-keep group-hover:text-primary-orange transition-colors">
+                  <h3 className="text-white text-[16px] md:text-xl font-bold mb-2 md:mb-3 break-keep group-hover:text-primary-orange transition-colors">
                     {item.title}
                   </h3>
                   <p
-                    className="text-gray-200 text-[15px] leading-relaxed break-keep"
+                    className="text-gray-200 text-[14px] md:text-[15px] leading-relaxed break-keep"
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   />
                 </div>

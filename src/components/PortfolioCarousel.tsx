@@ -120,10 +120,10 @@ export default function PortfolioCarousel() {
         {/* Header */}
         <div className="flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-end mb-10 md:mb-14">
           <div>
-            <h2 className="text-[26px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep">
+            <h2 className="text-[22px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep">
               실제 <span className="text-primary-orange">운송 사례</span>
             </h2>
-            <p className="mt-4 break-keep text-[18px] leading-7 text-gray-600">
+            <p className="mt-3 break-keep text-[14px] leading-relaxed md:mt-4 md:text-[18px] md:leading-7 text-gray-600">
               정밀 장비부터 특수 화물까지, 현장에 맞춘 운송 사례를 소개합니다.
               <br className="hidden md:block" />
               {" "}포장과 상차, 안전한 현장 인계까지 실제 작업 과정을 확인해 보세요.
@@ -154,7 +154,8 @@ export default function PortfolioCarousel() {
         <Swiper
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
           modules={[Navigation, Autoplay]}
-          spaceBetween={20}
+          spaceBetween={12}
+          breakpoints={{ 768: { spaceBetween: 20 } }}
           slidesPerView="auto"
           loop={true}
           navigation={{ prevEl: "#work-prev", nextEl: "#work-next" }}
@@ -162,7 +163,7 @@ export default function PortfolioCarousel() {
           className="w-full pb-6"
         >
           {cases.map((item, index) => (
-            <SwiperSlide key={item.id} className="!w-[300px] md:!w-[420px]">
+            <SwiperSlide key={item.id} className="!w-[calc((100vw-3rem-0.75rem)/2)] md:!w-[420px]">
               <article className="group relative bg-transparent">
                 <button
                   type="button"
@@ -176,21 +177,21 @@ export default function PortfolioCarousel() {
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="420px"
+                    sizes="(min-width: 768px) 420px, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                  <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
-                    <span className="text-xs md:text-sm font-bold tracking-[0.15em] uppercase text-white/60 mb-2 block">
+                  <div className="absolute inset-0 p-3 md:p-6 flex flex-col justify-end text-white">
+                    <span className="text-[10px] md:text-sm font-bold tracking-[0.12em] md:tracking-[0.15em] uppercase text-white/60 mb-1 md:mb-2 block">
                       {item.category}
                     </span>
-                    <h3 className="text-xl md:text-2xl leading-snug font-black tracking-tight break-keep">
+                    <h3 className="text-[14px] md:text-2xl leading-snug font-black tracking-tight break-keep">
                       {item.title}
                     </h3>
                   </div>
                 </div>
-                <div className="pt-4">
-                  <p className="text-base md:text-lg text-gray-500 leading-relaxed break-keep">
+                <div className="pt-3 md:pt-4">
+                  <p className="text-[14px] md:text-lg text-gray-500 leading-relaxed break-keep line-clamp-3 md:line-clamp-none">
                     {item.description}
                   </p>
                 </div>

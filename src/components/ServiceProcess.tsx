@@ -40,7 +40,7 @@ export default function ServiceProcess() {
           <div className="lg:sticky lg:top-36">
             <h2
               id="process-heading"
-              className="break-keep text-3xl font-black leading-[1.35] tracking-tight text-primary-navy md:text-[44px]"
+              className="break-keep text-[24px] font-black leading-[1.35] tracking-tight text-primary-navy md:text-[44px]"
             >
               첫 상담부터
               <br />
@@ -48,7 +48,7 @@ export default function ServiceProcess() {
               <br />
               <span className="text-primary-orange">빈틈없는 운송 과정</span>
             </h2>
-            <p className="mt-6 max-w-sm break-keep text-[18px] leading-7 text-gray-600">
+            <p className="mt-5 max-w-sm break-keep text-[14px] leading-relaxed md:text-[18px] md:leading-7 text-gray-600">
               화물마다 다른 조건을 먼저 살피고,
               <br className="hidden sm:block" />
               정밀 장비에 맞는 운송 과정을 안내합니다.
@@ -79,10 +79,10 @@ export default function ServiceProcess() {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="min-w-0 flex-1 border-b border-gray-200 pb-8 pt-5 sm:pb-10">
-                <h3 className="mb-3 break-keep text-lg font-bold tracking-tight text-primary-navy sm:text-xl">
+                <h3 className="mb-2 break-keep text-[16px] font-bold tracking-tight text-primary-navy sm:text-xl">
                   {step.title}
                 </h3>
-                <p className="break-keep text-sm leading-7 text-gray-600">
+                <p className="break-keep text-[13px] leading-relaxed sm:text-sm sm:leading-7 text-gray-600">
                   {step.description}
                 </p>
               </div>

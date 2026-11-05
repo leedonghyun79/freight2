@@ -14,12 +14,12 @@ export default function BrandLogo({ variant, className = "" }: BrandLogoProps) {
 
   if (src) {
     return (
-      <span className={`relative inline-block shrink-0 w-[200px] sm:w-[240px] aspect-[3/1] ${className}`}>
+      <span className={`relative inline-block shrink-0 w-[132px] sm:w-[170px] aspect-[3/1] ${className}`}>
         <Image
           src={src}
           alt={`${nameKo} 로고`}
           fill
-          sizes="(min-width: 640px) 240px, 200px"
+          sizes="(min-width: 640px) 170px, 132px"
           className={`object-contain ${useWhiteVersion ? "brightness-0 invert" : ""}`}
         />
       </span>

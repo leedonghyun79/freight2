@@ -61,7 +61,7 @@ export default function StickyCtaBar() {
     <>
       <div className="fixed inset-x-0 bottom-0 z-40">
         <div className="bg-[#14161a] border-t border-white/15 shadow-[0_-12px_36px_rgba(0,0,0,0.45)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-[21px] sm:py-[25px]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-3 sm:py-[21px] md:py-[25px]">
             {done ? (
               <div className="h-12 flex items-center gap-2.5 text-white">
                 <CheckCheck size={22} className="text-primary-orange" />
@@ -72,12 +72,12 @@ export default function StickyCtaBar() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="flex flex-wrap lg:flex-nowrap items-center gap-x-3 gap-y-3"
+                className="grid grid-cols-2 lg:flex lg:flex-nowrap items-center gap-x-3 gap-y-3"
               >
                 {/* Title + consent (lg+) */}
-                <div className="hidden lg:flex flex-col justify-center shrink-0 pr-4 mr-1 border-r border-white/15">
+                <div className="col-span-2 flex flex-row items-center justify-between gap-3 lg:col-auto lg:shrink-0 lg:flex-col lg:items-start lg:justify-center lg:gap-0 lg:pr-4 lg:mr-1 lg:border-r lg:border-white/15">
                   <span className="text-white font-black text-base tracking-tight">
-                    무료 견적문의
+                    빠른 견적 문의
                   </span>
                   <Consent onOpen={() => setShowPrivacy(true)} />
                 </div>
@@ -90,7 +90,7 @@ export default function StickyCtaBar() {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className={`${fieldClass} hidden sm:block w-32 shrink-0`}
+                  className={`${fieldClass} min-w-0 w-full lg:w-32 lg:shrink-0`}
                 />
                 <input
                   type="tel"
@@ -99,19 +99,19 @@ export default function StickyCtaBar() {
                   maxLength={13}
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: formatPhoneNumber(e.target.value) })}
-                  className={`${fieldClass} flex-1 sm:flex-none sm:w-44 min-w-0`}
+                  className={`${fieldClass} min-w-0 w-full lg:w-44 lg:flex-none`}
                 />
                 <input
                   type="text"
-                  placeholder="문의 내용을 입력해주세요"
+                  placeholder="문의 내용으로"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className={`${fieldClass} hidden md:block flex-1 min-w-0`}
+                  className={`${fieldClass} col-span-2 min-w-0 w-full lg:col-auto lg:flex-1`}
                 />
                 <button
                   type="submit"
                   disabled={sending}
-                  className={`h-12 shrink-0 px-6 rounded-lg font-bold text-sm sm:text-base text-white flex items-center gap-1.5 transition-colors shadow-md ${
+                  className={`col-span-2 lg:col-auto h-12 shrink-0 w-full lg:w-auto justify-center px-6 rounded-lg font-bold text-sm sm:text-base text-white flex items-center gap-1.5 transition-colors shadow-md ${
                     sending ? "bg-gray-500 cursor-not-allowed" : "bg-primary-orange hover:bg-accent-orange"
                   }`}
                 >
@@ -119,10 +119,6 @@ export default function StickyCtaBar() {
                   {!sending && <ChevronRight size={18} />}
                 </button>
 
-                {/* Consent (below inputs, < lg) */}
-                <div className="lg:hidden w-full">
-                  <Consent onOpen={() => setShowPrivacy(true)} />
-                </div>
 
                 {/* Contact (xl+) */}
                 <a

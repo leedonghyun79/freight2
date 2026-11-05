@@ -59,7 +59,7 @@ export default function ServiceSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[26px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep"
+            className="text-[22px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep"
           >
             주요 <span className="text-primary-orange">운송 분야</span>
           </motion.h2>
@@ -150,20 +150,17 @@ export default function ServiceSection() {
                   alt={service.title}
                   fill
                   sizes="100vw"
-                  className="object-cover opacity-70"
+                  className="object-cover opacity-80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                <h3 className="absolute inset-x-0 bottom-0 p-5 text-white text-2xl font-black tracking-tight break-keep">
-                  {service.title}
-                </h3>
-              </div>
-              <div className="p-5 text-white/90">
-                <p className="text-primary-orange text-[16px] font-bold mb-2 break-keep">
-                  {service.description}
-                </p>
-                <p className="text-gray-400 text-base leading-relaxed break-keep">
-                  {service.longDesc}
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-left text-white">
+                  <h3 className="mb-2 text-lg font-black tracking-tight break-keep">
+                    {service.title}
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-gray-200 break-keep">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             </motion.article>
           ))}

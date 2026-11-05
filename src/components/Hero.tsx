@@ -26,7 +26,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="sticky top-0 min-h-screen flex flex-col justify-center bg-primary-navy overflow-hidden z-0">
+    <section className="sticky top-0 min-h-[100svh] flex flex-col justify-center bg-primary-navy overflow-hidden z-0">
       {/* Full-bleed background image carousel */}
       <motion.div style={{ scale: bgScale }} className="absolute inset-0 z-0 bg-primary-navy">
         <AnimatePresence mode="popLayout">
@@ -64,7 +64,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-20 w-full pt-28 md:pt-24"
+        className="relative z-20 w-full pt-28 pb-[280px] md:pt-24 md:pb-0"
       >
         {/* Type block */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
@@ -72,77 +72,47 @@ export default function Hero() {
             {hero.titleLines.map((line, i) => (
               <span
                 key={i}
-                className="block text-[clamp(1.75rem,5.4vw,3.625rem)] leading-[1.14]"
+                className="block text-[clamp(1.5rem,6vw,3.625rem)] leading-[1.18]"
               >
                 {line}
               </span>
             ))}
-            <span className="block text-primary-orange text-[clamp(1.75rem,5.4vw,3.625rem)] leading-[1.14]">
+            <span className="block text-primary-orange text-[clamp(1.5rem,6vw,3.625rem)] leading-[1.18]">
               {hero.highlight}
             </span>
           </h1>
 
-          <div className="mt-7 md:mt-9 max-w-2xl space-y-1.5">
+          <div className="mt-6 md:mt-9 max-w-2xl space-y-1.5">
             {hero.description.map((line, i) => (
               <p
                 key={i}
-                className="text-[13px] md:text-[18px] text-gray-200 font-medium leading-relaxed break-keep drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]"
+                className="text-[15px] md:text-[18px] text-gray-200 font-medium leading-relaxed break-keep drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]"
               >
                 {line}
               </p>
             ))}
           </div>
 
-          <div className="mt-9 md:mt-11 flex flex-row items-center gap-3 md:gap-4">
+          <div className="mt-8 md:mt-11 flex flex-row items-center gap-3 md:gap-4">
             <a
               href="#contact"
               onClick={() => trackConversion()}
-              className="flex-1 md:flex-none h-[54px] px-4 md:px-10 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/30 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap box-border"
+              className="flex-1 md:flex-none h-12 md:h-[54px]px-4 md:px-10 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/30 uppercase tracking-widest text-[13px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap box-border"
             >
               빠른 견적 문의
             </a>
             <a
               href={`tel:${contact.phoneTel}`}
               onClick={() => trackConversion()}
-              className="flex-1 md:flex-none h-[54px] px-3 md:px-10 border border-white/40 bg-white/5 backdrop-blur-sm text-white rounded-lg hover:bg-white/15 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center box-border"
+              className="flex-1 md:flex-none h-12 md:h-[54px]px-3 md:px-10 border border-white/40 bg-white/5 backdrop-blur-sm text-white rounded-lg hover:bg-white/15 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center box-border"
             >
-              <div className="flex flex-row items-center gap-1.5 md:gap-2 leading-none">
-                <span className="text-[11px] md:text-[15px] text-white/80 md:text-white font-medium">전화상담</span>
-                <span className="text-[13px] md:text-[15px] font-bold">{contact.phoneDisplay}</span>
+              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 leading-none">
+                <span className="text-[13px] md:text-[15px] text-white/80 md:text-white font-medium">전화상담</span>
+                <span className="text-[14px] md:text-[15px] font-bold">{contact.phoneDisplay}</span>
               </div>
             </a>
           </div>
         </div>
-      </motion.div>
-
-      {/* Image index + ticks */}
-      <motion.div
-        style={{ opacity: contentOpacity }}
-        className="absolute bottom-28 lg:bottom-32 left-6 lg:left-[max(1.5rem,calc((100vw-80rem)/2+3rem))] z-20 flex items-center gap-3"
-      >
-        <div className="flex gap-2">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setCurrentImageIndex(i)}
-              aria-label={`${i + 1}번 이미지 보기`}
-              aria-current={i === currentImageIndex}
-              className="group flex items-center justify-center w-12 h-8 cursor-pointer"
-            >
-              <span
-                className={`block h-[5px] w-12 rounded-full transition-colors ${
-                  i === currentImageIndex
-                    ? "bg-primary-orange"
-                    : "bg-white/30 group-hover:bg-white/70"
-                }`}
-              />
-            </button>
-          ))}
-        </div>
-        <span className="font-outfit font-black text-white text-sm md:text-base tabular-nums drop-shadow">
-          {String(currentImageIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
-        </span>
       </motion.div>
 
       {/* Desktop Right-side Scroll Indicator — orange pulse running down a hairline rail */}
