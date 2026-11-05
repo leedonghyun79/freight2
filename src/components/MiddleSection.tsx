@@ -11,7 +11,7 @@ const items = [
   },
   {
     title: "완벽한 항습(제습) 시스템",
-    description: "온도만으로 항습(제습)하던 방법이 아닌 실시간습도계(운행중 모니터링), 제습전용장비, 수출용방습제구비 무시동(정차)시에도 제습 및 운송 완료후 제습 데이터 로그 제공<br><span class='text-[13px] text-gray-500 mt-2 block'>(*실제 제주우주센터 장비납품시 적용중)</span>",
+    description: "온도만으로 항습(제습)하던 방법이 아닌 실시간습도계(운행중 모니터링), 제습전용장비, 수출용방습제구비 무시동(정차)시에도 제습 및 운송 완료후 제습 데이터 로그 제공<br><span class='text-[13px] text-gray-300 mt-2 block'>(*실제 제주우주센터 장비납품시 적용중)</span>",
   },
   {
     title: "무진동화물차주 네트워크",
@@ -45,12 +45,6 @@ export default function MiddleSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20">
           {/* Left: Sticky Statement */}
           <div className="lg:sticky lg:top-32 self-start">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-primary-orange font-bold text-xs tracking-[0.2em] uppercase">
-                Why Us
-              </span>
-              <span className="h-px w-12 bg-primary-orange" />
-            </div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +75,7 @@ export default function MiddleSection() {
                     {item.title}
                   </h3>
                   <p
-                    className="text-gray-400 text-[15px] leading-relaxed break-keep"
+                    className="text-gray-200 text-[15px] leading-relaxed break-keep"
                     dangerouslySetInnerHTML={{ __html: item.description }}
                   />
                 </div>

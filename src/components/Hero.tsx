@@ -68,10 +68,6 @@ export default function Hero() {
       >
         {/* Type block */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <span className="text-primary-orange text-[11px] md:text-sm font-black tracking-[0.4em] uppercase mb-5 md:mb-7 block drop-shadow">
-            {hero.eyebrow}
-          </span>
-
           <h1 className="font-outfit font-black text-white tracking-tight break-keep drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]">
             {hero.titleLines.map((line, i) => (
               <span
@@ -99,8 +95,7 @@ export default function Hero() {
 
           <div className="mt-9 md:mt-11 flex flex-row items-center gap-3 md:gap-4">
             <a
-              href={contact.kakaoUrl}
-              target="_blank"
+              href="#contact"
               onClick={() => trackConversion()}
               className="flex-1 md:flex-none h-[54px] px-4 md:px-10 bg-primary-orange text-white font-bold rounded-lg hover:bg-accent-orange transition-all duration-300 shadow-2xl shadow-primary-orange/30 uppercase tracking-widest text-[11px] md:text-[15px] flex items-center justify-center cursor-pointer whitespace-nowrap box-border"
             >

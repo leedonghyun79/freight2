@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import MiddleSection from "@/components/MiddleSection";
 import ServiceSection from "@/components/ServiceSection";
-import TechnologySpecs from "@/components/TechnologySpecs";
+import ServiceProcess from "@/components/ServiceProcess";
 import PortfolioCarousel from "@/components/PortfolioCarousel";
 import ContactSection from "@/components/ContactSection";
 import FloatingAction from "@/components/FloatingAction";
@@ -19,7 +19,7 @@ export default function Home() {
       <div className="relative z-10 bg-primary-navy">
         <MiddleSection />
         <ServiceSection />
-        <TechnologySpecs />
+        <ServiceProcess />
         <PortfolioCarousel />
         <ContactSection />
         <FloatingAction />

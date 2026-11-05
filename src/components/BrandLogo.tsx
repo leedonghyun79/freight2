@@ -8,13 +8,20 @@ interface BrandLogoProps {
 }
 
 export default function BrandLogo({ variant, className = "" }: BrandLogoProps) {
-  const { logoDark, logoLight, nameKo, nameEn } = siteConfig.brand;
+  const { logoDark, logoLight, nameKo } = siteConfig.brand;
   const src = variant === "dark" ? logoLight : logoDark;
+  const useWhiteVersion = variant === "dark" && logoLight === logoDark;
 
   if (src) {
     return (
-      <span className={`relative inline-block w-[160px] h-[50px] ${className}`}>
-        <Image src={src} alt={`${nameKo} 로고`} fill className="object-contain" />
+      <span className={`relative inline-block shrink-0 w-[200px] sm:w-[240px] aspect-[3/1] ${className}`}>
+        <Image
+          src={src}
+          alt={`${nameKo} 로고`}
+          fill
+          sizes="(min-width: 640px) 240px, 200px"
+          className={`object-contain ${useWhiteVersion ? "brightness-0 invert" : ""}`}
+        />
       </span>
     );
   }
@@ -24,9 +31,6 @@ export default function BrandLogo({ variant, className = "" }: BrandLogoProps) {
   return (
     <span className={`inline-flex flex-col leading-none ${color} ${className}`}>
       <span className="font-outfit font-black text-lg tracking-tight">{nameKo}</span>
-      <span className="text-[10px] font-bold tracking-[0.25em] text-primary-orange">
-        {nameEn}
-      </span>
     </span>
   );
 }

@@ -19,9 +19,6 @@ export default function AboutSection() {
           {/* Detailed Content */}
           <div className="lg:w-1/2">
             <div className="mb-8">
-              <span className="text-primary-orange font-bold text-sm tracking-widest uppercase mb-4 block">
-                COMPANY OVERVIEW
-              </span>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +31,7 @@ export default function AboutSection() {
               </motion.h2>
             </div>
             
-            <p className="text-gray-500 mb-10 leading-relaxed text-lg font-light">
+            <p className="text-gray-500 mb-10 leading-relaxed text-[18px] font-light">
               {siteConfig.brand.nameKo}은 외부 충격과 미세한 온습도 변화에도 민감한 <strong>반도체 설비, 의료 장비, 기술 자산</strong>을 가장 안전하고 전문적으로 운반하기 위해 탄생했습니다.
               우리는 단순한 운송을 넘어, 고객사의 비즈니스 연속성을 보장하는 핵심 물류 파트너입니다.
             </p>

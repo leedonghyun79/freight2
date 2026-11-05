@@ -88,21 +88,15 @@ export default function ContactSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-12">
           {/* Left Title */}
           <div className="text-white text-left max-w-xl">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-primary-orange text-xs font-black tracking-[0.2em] uppercase">
-                Inquiry
-              </span>
-              <span className="h-px w-12 bg-primary-orange" />
-            </div>
             <h2 className="text-3xl md:text-4xl lg:text-[52px] font-outfit font-black leading-[1.15] tracking-tight break-keep">
               고객 맞춤 <br />
               <span className="text-primary-orange">운송 솔루션</span>
             </h2>
           </div>
 
-          {/* Right Description */}
-          <div className="md:text-right max-w-md pb-1">
-            <p className="text-gray-300 text-sm md:text-base leading-relaxed font-medium break-keep">
+          {/* Description */}
+          <div className="text-left max-w-md pb-1">
+            <p className="text-gray-300 text-[18px] leading-relaxed font-medium break-keep">
               {company.supportNote} <br />
               <span className="text-gray-400">지금 바로 전문가와 상담하세요.</span>
             </p>
@@ -124,7 +118,7 @@ export default function ContactSection() {
               >
                 <div className="mb-10">
                   <h3 className="text-2xl font-black text-primary-navy mb-3">온라인 견적 문의</h3>
-                  <p className="text-gray-400 text-[13px] font-medium">필수 정보(*)를 입력하시면 30분 이내에 답변 드립니다.</p>
+                  <p className="text-gray-400 text-[13px] font-medium">견적을 요청하시면 30분 이내에 답변드립니다.</p>
                 </div>
 
                   <form onSubmit={handleSubmit} className="space-y-8">

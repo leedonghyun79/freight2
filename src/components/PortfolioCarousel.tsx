@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import type { Swiper as SwiperInstance } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, X } from "lucide-react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -79,35 +81,64 @@ const cases = [
 ];
 
 export default function PortfolioCarousel() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const swiperRef = useRef<SwiperInstance | null>(null);
+  const isOpen = selectedIndex !== null;
+  const selectedCase = selectedIndex !== null ? cases[selectedIndex] : null;
+
+  const moveCase = (direction: number) => {
+    setSelectedIndex((current) =>
+      current === null ? null : (current + direction + cases.length) % cases.length
+    );
+  };
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!isOpen || !dialog) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    swiperRef.current?.autoplay.stop();
+    dialog.showModal();
+
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      if (swiperRef.current && !swiperRef.current.destroyed) {
+        swiperRef.current.autoplay.start();
+      }
+    };
+  }, [isOpen]);
+
   return (
     <section id="portfolio" className="py-20 md:py-28 bg-white overflow-x-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="flex flex-row justify-between items-end mb-10 md:mb-14">
+        <div className="flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-end mb-10 md:mb-14">
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-gray-400 font-bold text-sm tracking-[0.2em] uppercase">
-                Actual Cases
-              </span>
-              <span className="h-px w-12 bg-gray-400" />
-            </div>
             <h2 className="text-[26px] md:text-[44px] font-outfit font-black text-primary-navy tracking-tight break-keep">
               실제 <span className="text-primary-orange">운송 사례</span>
             </h2>
+            <p className="mt-4 break-keep text-[18px] leading-7 text-gray-600">
+              정밀 장비부터 특수 화물까지, 현장에 맞춘 운송 사례를 소개합니다.
+              <br className="hidden md:block" />
+              {" "}포장과 상차, 안전한 현장 인계까지 실제 작업 과정을 확인해 보세요.
+            </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3 self-end">
             <button
               id="work-prev"
               aria-label="이전 사례"
-              className="w-11 h-11 flex items-center justify-center text-primary-navy hover:text-primary-orange transition-colors cursor-pointer"
+              className="w-11 h-11 shrink-0 rounded-full border border-gray-300 flex items-center justify-center text-primary-navy hover:border-primary-orange hover:bg-primary-orange hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-orange transition-colors cursor-pointer"
             >
               <ArrowLeft size={22} />
             </button>
             <button
               id="work-next"
               aria-label="다음 사례"
-              className="w-11 h-11 flex items-center justify-center text-primary-navy hover:text-primary-orange transition-colors cursor-pointer"
+              className="w-11 h-11 shrink-0 rounded-full border border-gray-300 flex items-center justify-center text-primary-navy hover:border-primary-orange hover:bg-primary-orange hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-orange transition-colors cursor-pointer"
             >
               <ArrowRight size={22} />
             </button>
@@ -118,6 +149,7 @@ export default function PortfolioCarousel() {
       {/* Full-bleed rail */}
       <div className="pl-6 lg:pl-[max(3rem,calc((100vw-80rem)/2+3rem))]">
         <Swiper
+          onSwiper={(swiper) => { swiperRef.current = swiper; }}
           modules={[Navigation, Autoplay]}
           spaceBetween={20}
           slidesPerView="auto"
@@ -126,9 +158,16 @@ export default function PortfolioCarousel() {
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           className="w-full pb-6"
         >
-          {cases.map((item) => (
+          {cases.map((item, index) => (
             <SwiperSlide key={item.id} className="!w-[300px] md:!w-[420px]">
               <article className="group relative bg-transparent">
+                <button
+                  type="button"
+                  onClick={() => setSelectedIndex(index)}
+                  aria-label={`${item.title} 상세 보기`}
+                  aria-haspopup="dialog"
+                  className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary-orange"
+                />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                   <Image
                     src={item.image}
@@ -139,16 +178,16 @@ export default function PortfolioCarousel() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                   <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
-                    <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-white/60 mb-2 block">
+                    <span className="text-xs md:text-sm font-bold tracking-[0.15em] uppercase text-white/60 mb-2 block">
                       {item.category}
                     </span>
-                    <h3 className="text-lg md:text-xl font-black tracking-tight break-keep">
+                    <h3 className="text-xl md:text-2xl leading-snug font-black tracking-tight break-keep">
                       {item.title}
                     </h3>
                   </div>
                 </div>
                 <div className="pt-4">
-                  <p className="text-[14px] text-gray-500 leading-relaxed break-keep line-clamp-2">
+                  <p className="text-base md:text-lg text-gray-500 leading-relaxed break-keep">
                     {item.description}
                   </p>
                 </div>
@@ -157,6 +196,76 @@ export default function PortfolioCarousel() {
           ))}
         </Swiper>
       </div>
+
+      <dialog
+        ref={dialogRef}
+        aria-label={selectedCase ? `${selectedCase.title} 사진` : "운송 사례 사진"}
+        onClose={() => setSelectedIndex(null)}
+        onCancel={() => setSelectedIndex(null)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            const bounds = event.currentTarget.getBoundingClientRect();
+            if (
+              event.clientX < bounds.left || event.clientX > bounds.right ||
+              event.clientY < bounds.top || event.clientY > bounds.bottom
+            ) setSelectedIndex(null);
+          }
+        }}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            moveCase(event.key === "ArrowLeft" ? -1 : 1);
+          }
+        }}
+        className="fixed inset-0 m-auto h-[80dvh] max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-hidden rounded-2xl border-0 bg-[#111316] p-0 text-white shadow-2xl backdrop:bg-black/80 backdrop:backdrop-blur-sm"
+      >
+        {selectedCase && (
+          <div className="flex h-full flex-col">
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-4 bg-gradient-to-b from-black/75 to-transparent px-5 py-3 sm:px-8">
+              <span className="rounded-full bg-black/40 px-4 py-2 text-sm font-semibold tabular-nums text-white">
+                운송 사례 {(selectedIndex ?? 0) + 1} / {cases.length}
+              </span>
+              <button
+                type="button"
+                autoFocus
+                onClick={() => setSelectedIndex(null)}
+                aria-label="상세 보기 닫기"
+                className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-black/40 text-white transition-colors hover:bg-primary-orange focus-visible:outline-2 focus-visible:outline-primary-orange"
+              >
+                <X size={24} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="relative min-h-0 flex-1 bg-[#111316]">
+              <Image
+                key={selectedCase.id}
+                src={selectedCase.image}
+                alt={selectedCase.title}
+                fill
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                className="object-cover"
+              />
+            <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 items-center justify-between px-4 sm:px-8">
+              <button
+                type="button"
+                onClick={() => moveCase(-1)}
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-sm transition-colors hover:border-primary-orange hover:bg-primary-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-orange sm:h-14 sm:w-14"
+              >
+                <ArrowLeft size={20} aria-hidden="true" />
+                <span className="sr-only">이전 사례</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => moveCase(1)}
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-black/50 text-white backdrop-blur-sm transition-colors hover:border-primary-orange hover:bg-primary-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-orange sm:h-14 sm:w-14"
+              >
+                <span className="sr-only">다음 사례</span>
+                <ArrowRight size={20} aria-hidden="true" />
+              </button>
+            </div>
+            </div>
+          </div>
+        )}
+      </dialog>
     </section>
   );
 }

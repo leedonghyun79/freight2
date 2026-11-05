@@ -54,8 +54,8 @@ export const siteConfig: SiteConfig = {
   brand: {
     nameKo: "한국정밀운송",
     nameEn: "HANJUNG PRECISION",
-    logoDark: "",
-    logoLight: "",
+    logoDark: "/images/korea-precision-transport-logo.png",
+    logoLight: "/images/korea-precision-transport-logo.png",
   },
   contact: {
     phoneDisplay: "1600-0000",
@@ -89,10 +89,9 @@ export const siteConfig: SiteConfig = {
   },
   nav: [
     { name: "회사 소개", href: "#about" },
-    { name: "비즈니스 영역", href: "#services" },
-    { name: "핵심 기술", href: "#technology" },
+    { name: "운송 분야", href: "#services" },
+    { name: "이용 절차", href: "#process" },
     { name: "운송 사례", href: "#portfolio" },
-    { name: "견적 문의", href: "#contact" },
   ],
   analytics: {
     gaMeasurementId: "",

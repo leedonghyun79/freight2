@@ -2,8 +2,8 @@
 
 :root {
   --primary-navy: #1F2328;   /* charcoal (구 navy) */
-  --primary-orange: #D22F27; /* red (구 orange) */
-  --accent-orange: #B0241D;  /* red hover */
+  --primary-orange: #F25800; /* 로고 오렌지 */
+  --accent-orange: #D94E00;  /* orange hover */
   --surface: #F5F5F4;
   --glass: rgba(255, 255, 255, 0.7);
   --dark-surface: #111316;
@@ -56,7 +56,7 @@ body {
 }
 
 .heading-gradient {
-  background: linear-gradient(135deg, #1F2328 0%, #D22F27 100%);
+  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-orange) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
