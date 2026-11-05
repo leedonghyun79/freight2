@@ -107,7 +107,7 @@ export default function Hero() {
               className="flex-1 md:flex-none h-[54px] px-3 md:px-10 border border-white/40 bg-white/5 backdrop-blur-sm text-white rounded-lg hover:bg-white/15 transition-all duration-300 uppercase tracking-widest whitespace-nowrap cursor-pointer flex items-center justify-center box-border"
             >
               <div className="flex flex-row items-center gap-1.5 md:gap-2 leading-none">
-                <span className="text-[11px] md:text-[15px] text-white/80 md:text-white font-medium">고객센터</span>
+                <span className="text-[11px] md:text-[15px] text-white/80 md:text-white font-medium">전화상담</span>
                 <span className="text-[13px] md:text-[15px] font-bold">{contact.phoneDisplay}</span>
               </div>
             </a>

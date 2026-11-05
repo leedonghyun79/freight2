@@ -92,13 +92,13 @@ export default function ServiceSection() {
                   fill
                   sizes="(max-width: 1024px) 55vw, 760px"
                   className={`object-cover transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    active ? "scale-105 opacity-70" : "scale-100 opacity-60"
+                    active ? "scale-105 opacity-100" : "scale-100 opacity-60"
                   }`}
                 />
                 <div
                   className={`absolute inset-0 transition-opacity duration-500 bg-gradient-to-t ${
                     active
-                      ? "from-black/95 via-black/50 to-black/10"
+                      ? "from-black/85 via-black/10 to-transparent"
                       : "from-black/85 via-black/40 to-black/60"
                   }`}
                 />
@@ -108,7 +108,7 @@ export default function ServiceSection() {
                   <div className="absolute inset-0 flex items-end justify-center pb-12 pointer-events-none">
                     <span
                       style={{ writingMode: "vertical-rl", wordSpacing: "0.6em" }}
-                      className="text-white font-black text-xl lg:text-2xl tracking-[0.2em] whitespace-nowrap"
+                      className="text-white font-black text-[22px] lg:text-[26px] tracking-[0.15em] whitespace-nowrap"
                     >
                       {service.title}
                     </span>
@@ -121,10 +121,10 @@ export default function ServiceSection() {
                     active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
                   }`}
                 >
-                  <h3 className="font-black tracking-tight break-keep text-2xl lg:text-3xl mb-4">
+                  <h3 className="font-black tracking-tight break-keep text-[28px] lg:text-4xl mb-4">
                     {service.title}
                   </h3>
-                  <p className="text-gray-200 text-[14px] lg:text-[15px] leading-relaxed break-keep max-w-[460px]">
+                  <p className="text-gray-200 text-[16px] leading-relaxed break-keep max-w-[460px]">
                     {service.description}
                   </p>
                 </div>
@@ -153,15 +153,15 @@ export default function ServiceSection() {
                   className="object-cover opacity-70"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                <h3 className="absolute inset-x-0 bottom-0 p-5 text-white text-xl font-black tracking-tight break-keep">
+                <h3 className="absolute inset-x-0 bottom-0 p-5 text-white text-2xl font-black tracking-tight break-keep">
                   {service.title}
                 </h3>
               </div>
               <div className="p-5 text-white/90">
-                <p className="text-primary-orange text-[14px] font-bold mb-2 break-keep">
+                <p className="text-primary-orange text-[16px] font-bold mb-2 break-keep">
                   {service.description}
                 </p>
-                <p className="text-gray-400 text-[13px] leading-relaxed break-keep">
+                <p className="text-gray-400 text-base leading-relaxed break-keep">
                   {service.longDesc}
                 </p>
               </div>

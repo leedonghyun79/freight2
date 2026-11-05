@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Swiper as SwiperInstance } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
@@ -11,7 +12,6 @@ import { ArrowLeft, ArrowRight, X } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 
 const cases = [
   {
@@ -82,12 +82,15 @@ const cases = [
 
 export default function PortfolioCarousel() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [slideDirection, setSlideDirection] = useState(1);
+  const reduceMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const swiperRef = useRef<SwiperInstance | null>(null);
   const isOpen = selectedIndex !== null;
   const selectedCase = selectedIndex !== null ? cases[selectedIndex] : null;
 
   const moveCase = (direction: number) => {
+    setSlideDirection(direction);
     setSelectedIndex((current) =>
       current === null ? null : (current + direction + cases.length) % cases.length
     );
@@ -235,15 +238,31 @@ export default function PortfolioCarousel() {
                 <X size={24} aria-hidden="true" />
               </button>
             </div>
-            <div className="relative min-h-0 flex-1 bg-[#111316]">
-              <Image
-                key={selectedCase.id}
-                src={selectedCase.image}
-                alt={selectedCase.title}
-                fill
-                sizes="(min-width: 1024px) 1024px, 100vw"
-                className="object-cover"
-              />
+            <div className="relative min-h-0 flex-1 overflow-hidden bg-[#111316]">
+              <AnimatePresence initial={false} custom={slideDirection}>
+                <motion.div
+                  key={selectedCase.id}
+                  custom={slideDirection}
+                  variants={{
+                    enter: (direction: number) => ({ x: reduceMotion ? 0 : `${direction * 100}%` }),
+                    center: { x: 0 },
+                    exit: (direction: number) => ({ x: reduceMotion ? 0 : `${direction * -100}%` }),
+                  }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={selectedCase.image}
+                    alt={selectedCase.title}
+                    fill
+                    sizes="(min-width: 1024px) 1024px, 100vw"
+                    className="object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
             <div className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 items-center justify-between px-4 sm:px-8">
               <button
                 type="button"

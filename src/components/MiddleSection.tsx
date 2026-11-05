@@ -52,7 +52,7 @@ export default function MiddleSection() {
               className="text-white font-outfit font-black tracking-tight leading-[1.15] text-[32px] md:text-[44px] lg:text-[52px] break-keep"
             >
               고가의 장비,
-              <br />그 가치를 그대로 전합니다.
+              <br /><span className="text-primary-orange">그 가치를</span> 그대로 전합니다.
             </motion.h2>
           </div>
 
