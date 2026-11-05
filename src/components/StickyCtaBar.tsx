@@ -61,7 +61,7 @@ export default function StickyCtaBar() {
     <>
       <div className="fixed inset-x-0 bottom-0 z-40">
         <div className="bg-[#14161a] border-t border-white/15 shadow-[0_-12px_36px_rgba(0,0,0,0.45)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-4 sm:py-5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-[21px] sm:py-[25px]">
             {done ? (
               <div className="h-12 flex items-center gap-2.5 text-white">
                 <CheckCheck size={22} className="text-primary-orange" />

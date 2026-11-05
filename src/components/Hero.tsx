@@ -120,17 +120,27 @@ export default function Hero() {
         style={{ opacity: contentOpacity }}
         className="absolute bottom-28 lg:bottom-32 left-6 lg:left-[max(1.5rem,calc((100vw-80rem)/2+3rem))] z-20 flex items-center gap-3"
       >
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           {images.map((_, i) => (
-            <span
+            <button
               key={i}
-              className={`h-[3px] w-6 rounded-full transition-colors ${
-                i === currentImageIndex ? "bg-primary-orange" : "bg-white/30"
-              }`}
-            />
+              type="button"
+              onClick={() => setCurrentImageIndex(i)}
+              aria-label={`${i + 1}번 이미지 보기`}
+              aria-current={i === currentImageIndex}
+              className="group flex items-center justify-center w-12 h-8 cursor-pointer"
+            >
+              <span
+                className={`block h-[5px] w-12 rounded-full transition-colors ${
+                  i === currentImageIndex
+                    ? "bg-primary-orange"
+                    : "bg-white/30 group-hover:bg-white/70"
+                }`}
+              />
+            </button>
           ))}
         </div>
-        <span className="font-outfit font-black text-white text-xs tabular-nums drop-shadow">
+        <span className="font-outfit font-black text-white text-sm md:text-base tabular-nums drop-shadow">
           {String(currentImageIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
         </span>
       </motion.div>
